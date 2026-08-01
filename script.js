@@ -40,7 +40,7 @@
     return paths[0];
   }
 
-  const HERO_IMAGE_CANDIDATES = ['images/hero/1.jpg'];
+  const HERO_IMAGE_CANDIDATES = ['images/intro/wedding-cover.jpg'];
   let heroImagePromise = null;
 
   function primeHeroImage() {
@@ -249,7 +249,10 @@ function initCurtain() {
     });
 
     hideTimer = setTimeout(hideIntroCompletely, 1580);
-    popupTimer = setTimeout(showAttendPopup, 260);
+    // 시니어판: 참석여부 팝업은 이제 자동으로 뜨지 않습니다("마음 전하실 곳"
+    // 아래 버튼으로만 수동 실행). 팝업이 닫힐 때 시작되던 본문 모션은
+    // 대신 여기서 곧바로 시작합니다.
+    popupTimer = setTimeout(markReady, 260);
   }
 
   curtain.classList.add('is-ready');
@@ -433,12 +436,21 @@ function initCurtain() {
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     // 초대글을 한 줄씩 나누어, 한 줄 한 줄 차례로 떠오르게 합니다.
-    const inviteLines = inviteRaw.split('\n').map((s) => s.trim()).filter(Boolean);
+    // 빈 줄(문단 사이 여백)은 filter로 없애지 않고, 별도의 여백용
+    // span으로 렌더링합니다 — 예전엔 filter(Boolean)이 빈 줄을 통째로
+    // 지워버려서 "한 줄 여백을 달라"고 해도 전혀 반영되지 않았습니다.
+    const inviteLines = inviteRaw.split('\n').map((s) => s.trim());
     if (text) {
       if (inviteLines.length > 1) {
+        let visibleIndex = 0;
         text.innerHTML = inviteLines
-          .map((ln, i) => {
-            const order = (3.4 + i * 0.95).toFixed(2);
+          .map((ln) => {
+            if (!ln) {
+              // 빈 줄 하나를 문단 두 줄 정도의 여백으로 표시합니다.
+              return `<span class="gline gline--gap" aria-hidden="true"></span>`;
+            }
+            const order = (3.4 + visibleIndex * 0.95).toFixed(2);
+            visibleIndex++;
             return `<span class="gline" data-reveal data-reveal-order="${order}">${escapeHtml(ln)}</span>`;
           })
           .join('');
@@ -468,7 +480,7 @@ function initCurtain() {
 
       parents.innerHTML = `
         <div class="obeg" data-reveal data-reveal-order="1">
-          <p class="obeg__parents">${makeName(g.father, g.fatherDeceased)} &middot; ${makeName(g.mother, g.motherDeceased)} <em>의 아들</em></p>
+          <p class="obeg__parents"><span class="obeg__parents-names">${makeName(g.father, g.fatherDeceased)} &middot; ${makeName(g.mother, g.motherDeceased)}</span> <em>의 아들</em></p>
           <p class="obeg__name">${g.fullName || g.name}</p>
           <p class="obeg__en">${g.nameEn || ''}</p>
         </div>
@@ -483,7 +495,7 @@ function initCurtain() {
           </svg>
         </span>
         <div class="obeg" data-reveal data-reveal-order="2">
-          <p class="obeg__parents">${makeName(b.father, b.fatherDeceased)} &middot; ${makeName(b.mother, b.motherDeceased)} <em>의 딸</em></p>
+          <p class="obeg__parents"><span class="obeg__parents-names">${makeName(b.father, b.fatherDeceased)} &middot; ${makeName(b.mother, b.motherDeceased)}</span> <em>의 딸</em></p>
           <p class="obeg__name">${b.fullName || b.name}</p>
           <p class="obeg__en">${b.nameEn || ''}</p>
         </div>
@@ -528,7 +540,7 @@ async function initCalendar() {
       <div class="dcal__photo" id="dcal-photo">
         <img id="dcal-photo-img" src="" alt="웨딩 사진" loading="lazy" decoding="async" draggable="false" />
       </div>
-      <p class="dcal__month script-font" aria-hidden="true">${MONTHS_KR[m - 1]}</p>
+      <p class="dcal__month script-font" aria-hidden="true">${m}<span class="dcal__month-unit">월</span></p>
       <div class="dcal__grid">${cells}</div>
       <p class="dcal__dateline">${dowEn}, ${MONTHS[m - 1]} ${d}, ${y}</p>
       <p class="dcal__dday">결혼식까지 <b id="dcal-days">0</b>일 남았습니다</p>
@@ -540,7 +552,7 @@ async function initCalendar() {
   const photoImg = document.getElementById('dcal-photo-img');
   if (photoImg) {
     const src = await resolveFirstImage([
-      'images/calendar/1.jpg'
+      '../images/calendar/1.jpg'
     ]);
     photoImg.src = src;
     photoImg.addEventListener('error', () => {
@@ -1493,7 +1505,7 @@ async function initStoryPost() {
             content: {
               title: shareData.title,
               description: shareData.text,
-              imageUrl: new URL('images/og/1.jpg', window.location.href).href,
+              imageUrl: new URL('../images/og/1.jpg', window.location.href).href,
               link: { mobileWebUrl: shareData.url, webUrl: shareData.url }
             },
             buttons: [{
@@ -1779,7 +1791,9 @@ async function initStoryPost() {
           if (/^\[/.test(ln)) cls += ' is-label';
           else if (/^＊/.test(ln)) cls += ' is-note';
           else if (/^제\s?\d/.test(ln)) cls += ' is-sub';
-          return `<p class="${cls}">${ln}</p>`;
+          // 괄호로 된 부가설명(예: "(3분 소요)")만 살짝 작게 감쌉니다.
+          const withSmallParens = ln.replace(/(\([^)]*\))/g, '<span class="location-transport__detail">$1</span>');
+          return `<p class="${cls}">${withSmallParens}</p>`;
         })
         .join('');
       return `
@@ -2012,9 +2026,9 @@ async function initStoryPost() {
       opacity: var(--opacity);
       animation: luxStarTwinkle var(--twinkle) ease-in-out var(--delay) infinite;
       filter:
-        drop-shadow(0 0 2.5px rgba(255,255,255,0.75))
-        drop-shadow(0 0 6px rgba(248,230,200,0.4))
-        drop-shadow(0 0 11px rgba(255,247,236,0.2));
+        drop-shadow(0 0 4px rgba(255,255,255,0.95))
+        drop-shadow(0 0 9px rgba(248,230,200,0.6))
+        drop-shadow(0 0 16px rgba(255,247,236,0.35));
     }
 
     .lux-star svg {
@@ -2229,7 +2243,7 @@ async function initStoryPost() {
   function createSparkles() {
     layer.innerHTML = "";
 
-    const count = 60;
+    const count = 100;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");
@@ -2242,20 +2256,20 @@ async function initStoryPost() {
       let size, opacity, fall, twinkle, sway;
 
       if (depth > 0.75) {
-  size = rand(5, 7.2);
-  opacity = rand(0.46, 0.64);
+  size = rand(7, 10);
+  opacity = rand(0.72, 0.92);
   fall = rand(11, 16);
   twinkle = rand(2.2, 3.3);
   sway = rand(-20, 20);
 } else if (depth > 0.38) {
-  size = rand(3.8, 5.4);
-  opacity = rand(0.30, 0.46);
+  size = rand(5, 7);
+  opacity = rand(0.52, 0.7);
   fall = rand(15, 21);
   twinkle = rand(2.8, 4.2);
   sway = rand(-17, 17);
 } else {
-  size = rand(2.4, 3.6);
-  opacity = rand(0.18, 0.28);
+  size = rand(3.2, 4.6);
+  opacity = rand(0.34, 0.48);
   fall = rand(18, 25);
   twinkle = rand(3.6, 5.2);
   sway = rand(-14, 14);
@@ -2287,6 +2301,7 @@ async function initStoryPost() {
     resizeTimer = setTimeout(createSparkles, 250);
   });
 })();
+
 
   /* ── Init ── */
   async function init() {

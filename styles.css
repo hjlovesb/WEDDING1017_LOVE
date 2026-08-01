@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Ortica Linear';
-  src: url('fonts/OrticaLinear-Regular.woff2') format('woff2');
+  src: url('../fonts/OrticaLinear-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -6343,7 +6343,7 @@ body {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  background: #171713 url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+  background: #171713 url('../images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   opacity: 1 !important;
   visibility: visible !important;
   transform: none !important;
@@ -6509,7 +6509,7 @@ body:not(.intro-active) .hero {
   justify-content: center !important;
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.10), rgba(17, 15, 13, 0.18)),
-    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('../images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   overflow: hidden !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -6550,7 +6550,7 @@ body:not(.intro-active) .hero {
   position: absolute !important;
   inset: 0 !important;
   z-index: 2 !important;
-  background: url('images/intro/envelope.png') center center / contain no-repeat !important;
+  background: url('../images/intro/envelope.png') center center / contain no-repeat !important;
   clip-path: polygon(8% 0%, 92% 0%, 50% 39%) !important;
   transform-origin: 50% 4% !important;
   opacity: 0.98 !important;
@@ -7341,7 +7341,7 @@ body:not(.intro-active) .hero {
 #curtain.curtain {
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.08), rgba(17, 15, 13, 0.14)),
-    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('../images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   background-attachment: scroll !important;
   transform: none !important;
   animation: none !important;
@@ -7498,7 +7498,7 @@ body:not(.intro-active) .hero {
   opacity: 1 !important;
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.06), rgba(17, 15, 13, 0.12)),
-    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('../images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   background-attachment: scroll !important;
   background-position: center center !important;
   transform: none !important;
@@ -11423,7 +11423,7 @@ body .section .section__title::after { content: none !important; display: none !
   height: auto !important;
   max-height: 78vh !important;
   padding: 0 !important;
-  background: url('images/popup/card.png') center / 100% 100% no-repeat !important;
+  background: url('../images/popup/card.png') center / 100% 100% no-repeat !important;
   box-shadow: none !important;
   overflow: visible !important;
   filter: drop-shadow(0 24px 44px rgba(38, 28, 18, 0.42));
@@ -11756,7 +11756,7 @@ body .section .section__title::after { content: none !important; display: none !
   aspect-ratio: 831 / 1176;
   max-height: 80vh !important;
   background-color: transparent !important;
-  background-image: url('images/popup/card.png') !important;
+  background-image: url('../images/popup/card.png') !important;
   background-size: 100% 100% !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -14271,12 +14271,51 @@ body, p, span, div, a, button, h1, h2, h3 {
   letter-spacing: 0.02em !important;
 }
 
-/* 달력 — 월 제목(10월)과 날짜 숫자를 더 크게, 17일 표시 동그라미도 더 크게 */
-.dcal__month {
-  font-size: 1.9rem !important;
+/* 시니어판 전용 오프닝 배경 이미지로 교체 */
+#curtain,
+#curtain.curtain,
+#curtain.curtain.is-ready {
+  background:
+    linear-gradient(180deg, rgba(17, 15, 13, 0.10), rgba(17, 15, 13, 0.18)),
+    url('images/intro/intro-bg-senior.jpg?v=2') center center / cover no-repeat !important;
+}
+
+
+   것을 확실히 가운데 정렬합니다(letter-spacing이 중앙정렬을 미묘하게
+   틀어지게 하고 있어서 제거함) */
+.calendar-section .section__inner {
+  max-width: 480px !important;
+}
+.calendar,
+.calendar-section .calendar {
+  max-width: 480px !important;
+  width: 100% !important;
+}
+.dcal {
+  max-width: 480px !important;
+  width: 100% !important;
+}
+.dcal__dateline {
+  display: none !important;
+}
+.dcal__grid {
+  column-gap: 13px !important;
+  row-gap: 16px !important;
+  max-width: 380px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-items: center !important;
+}
+.dcal__day {
+  justify-content: center !important;
+  text-align: center !important;
+  height: 40px !important;
 }
 .dcal__day i {
   font-size: 1.3rem !important;
+  letter-spacing: normal !important;
+  text-align: center !important;
 }
 .dcal__day.is-wedding i {
   font-size: 1.45rem !important;
@@ -14285,9 +14324,101 @@ body, p, span, div, a, button, h1, h2, h3 {
   width: 34px !important;
   height: 34px !important;
 }
+/* 월 제목 — 숫자(10)는 더 크게, "월" 글자는 작게 */
+.dcal__month {
+  font-size: 2rem !important;
+}
+.dcal__month-unit {
+  font-size: 0.75rem !important;
+  margin-left: 2px;
+}
+/* "결혼식까지 N일 남았습니다" 문구는 더 작게 */
+.dcal__dday {
+  font-size: 0.72rem !important;
+}
 
-/* 오시는 길 안내 문구 — 시니어판은 기본 글자가 커서 한 줄을 넘기 쉬우므로,
-   이 항목만 살짝 작게 줄여 한 줄에 들어가게 합니다 */
-.location-transport__line {
-  font-size: 0.65rem !important;
+/* 계좌(Celebration) — 은행명/계좌번호가 커진 시니어 폰트에서 한 줄을
+   넘어 지저분해 보이지 않도록 폰트를 살짝 줄입니다 */
+/* 계좌(Celebration) — 은행명/계좌번호가 커진 시니어 폰트에서 한 줄을
+   넘어 지저분해 보이지 않도록 폰트를 줄이고 줄바꿈을 막습니다.
+   (주의: 실제 렌더링되는 클래스는 .account-item__* 입니다 — .acc-row__*
+   라는 클래스는 DOM에 존재하지 않으므로 절대 그걸로 다시 시도하지 말 것) */
+.account-item {
+  flex-wrap: nowrap !important;
+}
+.account-item__role,
+.account-item__detail,
+.account-item__name {
+  font-size: 0.68rem !important;
+  white-space: nowrap !important;
+}
+
+/* 오시는 길 안내 문구 — 소제목 아래 내용들이 항목마다 크기가 제각각이던
+   것을 하나로 통일하고, 어르신이 보기 좋게 크게 키웠습니다. 웬만하면
+   한 줄을 넘기지 않도록 하되, 그래도 넘치면 "(3분 소요)" 같은 괄호
+   부가설명만 살짝 작게 줄여서 한 줄에 들어가게 합니다. */
+.location-transport__line,
+.location-transport__line.is-label,
+.location-transport__line.is-sub,
+.location-transport__line.is-note {
+  font-size: 1rem !important;
+  white-space: normal !important;
+}
+.location-transport__detail {
+  font-size: 0.78rem !important;
+  white-space: nowrap !important;
+}
+
+/* Our Beginning — 부모님 이름만 크게(의 아들/딸은 그대로), 절대 줄바꿈 안 되게 */
+.obeg__parents {
+  white-space: nowrap !important;
+  font-size: 0.84rem !important;
+}
+.obeg__parents-names {
+  font-size: 1.16rem !important;
+}
+
+/* 참석여부 전달하기 버튼 (팝업은 이제 이 버튼을 눌러야만 뜹니다) */
+.section.rsvp-trigger {
+  padding: 36px 0 48px !important;
+  text-align: center !important;
+  background: #F7F2E6 !important;
+}
+.rsvp-trigger__btn {
+  display: block;
+  width: min(70vw, 240px);
+  margin: 0 auto;
+  padding: 12px 0;
+  border: 1px solid rgba(74, 74, 68, 0.22);
+  border-radius: 999px;
+  background: #3f3930;
+  color: #fdfaf5;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(63, 50, 44, 0.16);
+}
+.rsvp-trigger__btn:active {
+  transform: translateY(1px);
+}
+
+/* 참석여부 팝업 — 안내문이 4줄로 넘치던 것을 3줄로, 예식일자의 한글
+   부분만 살짝 줄여서 가로로 빽빽해 보이지 않게 (숫자 크기는 유지) */
+.rsvp-modal__summary {
+  font-size: 0.72rem !important;
+  line-height: 1.6 !important;
+}
+.rsvp-modal__date {
+  font-size: 0.6rem !important;
+}
+.rsvp-modal__date .rsvp-date-num {
+  font-size: 0.95rem !important;
+}
+
+/* 초대글 문단 사이 여백 — 시각적으로 두 줄 정도 띄워서 분리되게 */
+.gline--gap {
+  display: block;
+  height: 2.6rem;
 }

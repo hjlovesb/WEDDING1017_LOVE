@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var START_AT = 71; // 1:11
+  var START_AT = 0; // 새 음원으로 교체 — 처음부터 재생
 
   function initMusic() {
     var audio = document.getElementById('bgm');
