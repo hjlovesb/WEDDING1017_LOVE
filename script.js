@@ -1515,7 +1515,7 @@ async function initStoryPost() {
             content: {
               title: shareData.title,
               description: shareData.text,
-              imageUrl: new URL('images/og/1.jpg', window.location.href).href,
+              imageUrl: new URL('images/intro/og-link-senior.jpg', window.location.href).href,
               link: { mobileWebUrl: shareData.url, webUrl: shareData.url }
             },
             buttons: [{
@@ -2143,7 +2143,7 @@ async function initStoryPost() {
   function createSparkles() {
     layer.innerHTML = "";
 
-    const count = 55;
+    const count = 48;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");
@@ -2156,20 +2156,20 @@ async function initStoryPost() {
       let size, opacity, fall, twinkle, sway;
 
       if (depth > 0.75) {
-  size = rand(7, 10);
-  opacity = rand(0.72, 0.92);
+  size = rand(5.5, 7.5);
+  opacity = rand(0.6, 0.78);
   fall = rand(11, 16);
   twinkle = rand(2.2, 3.3);
   sway = rand(-20, 20);
 } else if (depth > 0.38) {
-  size = rand(5, 7);
-  opacity = rand(0.52, 0.7);
+  size = rand(4, 5.6);
+  opacity = rand(0.42, 0.58);
   fall = rand(15, 21);
   twinkle = rand(2.8, 4.2);
   sway = rand(-17, 17);
 } else {
-  size = rand(3.2, 4.6);
-  opacity = rand(0.34, 0.48);
+  size = rand(2.6, 3.8);
+  opacity = rand(0.26, 0.4);
   fall = rand(18, 25);
   twinkle = rand(3.6, 5.2);
   sway = rand(-14, 14);

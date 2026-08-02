@@ -14494,7 +14494,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 /* 참석여부 팝업 — 좀 더 크게, 안내문구 마지막 줄이 팝업 밖으로
    튀어나가지 않도록 아래쪽 여백 확보 */
 .rsvp-modal__panel {
-  width: min(92vw, 360px) !important;
+  width: min(88vw, 345px) !important;
   max-width: none !important;
 }
 .rsvp-card {

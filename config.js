@@ -129,7 +129,7 @@ const CONFIG = {
   // ── 링크 공유 시 나타나는 문구 ──
   kakaoShare: {
     // Kakao Developers 앱키 (JavaScript 키)
-    appKey: "",
+    appKey: "5e3278c744a77300e17e8193184b3aaf",
     title: "이현준 ♥ 박상빈 결혼합니다",
     description: "2026. 10. 17 (Sat) PM 4:20\n나비스퀘어 나비홀",
   },
