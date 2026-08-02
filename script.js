@@ -2034,10 +2034,9 @@ async function initStoryPost() {
       transform-origin: center;
       opacity: var(--opacity);
       animation: luxStarTwinkle var(--twinkle) ease-in-out var(--delay) infinite;
-      filter:
-        drop-shadow(0 0 4px rgba(255,255,255,0.95))
-        drop-shadow(0 0 9px rgba(248,230,200,0.6))
-        drop-shadow(0 0 16px rgba(255,247,236,0.35));
+      /* 고정된 광채 하나만 사용합니다(모바일 성능 부담이 큰,
+         프레임마다 여러 겹 겹쳐 애니메이션되는 필터는 제거함) */
+      filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55));
     }
 
     .lux-star svg {
@@ -2065,125 +2064,17 @@ async function initStoryPost() {
       }
     }
 
-    /* 핵심: 멈추지 않고 한 사이클 안에서 여러 번 반짝이게 */
+    /* 반짝임 — opacity와 scale만 움직입니다(가벼움). 필터는 애니메이션하지
+       않습니다(모바일에서 매 프레임 필터 재계산이 매우 무겁습니다) */
     @keyframes luxStarTwinkle {
-      0% {
-        opacity: calc(var(--opacity) * 0.18);
-        transform: scale(0.45);
-        filter:
-          brightness(0.92)
-          drop-shadow(0 0 1px rgba(255,255,255,0.18))
-          drop-shadow(0 0 2px rgba(248,230,200,0.10));
-      }
-
-      8% {
-        opacity: calc(var(--opacity) * 0.42);
-        transform: scale(0.72);
-        filter:
-          brightness(1.08)
-          drop-shadow(0 0 2px rgba(255,255,255,0.32))
-          drop-shadow(0 0 4px rgba(248,230,200,0.16));
-      }
-
-      16% {
-        opacity: calc(var(--opacity) * 0.85);
-        transform: scale(1.02);
-        filter:
-          brightness(1.52)
-          drop-shadow(0 0 4px rgba(255,255,255,0.56))
-          drop-shadow(0 0 7px rgba(248,230,200,0.24));
-      }
-
-      22% {
-        opacity: calc(var(--opacity) * 0.40);
-        transform: scale(0.66);
-        filter:
-          brightness(1.02)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 3px rgba(248,230,200,0.12));
-      }
-
-      30% {
-        opacity: calc(var(--opacity) * 0.72);
-        transform: scale(0.92);
-        filter:
-          brightness(1.34)
-          drop-shadow(0 0 3px rgba(255,255,255,0.42))
-          drop-shadow(0 0 6px rgba(248,230,200,0.20));
-      }
-
-      38% {
-  opacity: calc(var(--opacity) * 0.88);
-  transform: scale(1.04);
-  filter:
-    brightness(1.62)
-    drop-shadow(0 0 3px rgba(255,255,255,0.56))
-    drop-shadow(0 0 6px rgba(248,230,200,0.22))
-    drop-shadow(0 0 9px rgba(255,247,236,0.08));
-}
-
-      46% {
-        opacity: calc(var(--opacity) * 0.48);
-        transform: scale(0.68);
-        filter:
-          brightness(1.00)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 4px rgba(248,230,200,0.12));
-      }
-
-      56% {
-        opacity: calc(var(--opacity) * 0.76);
-        transform: scale(0.94);
-        filter:
-          brightness(1.42)
-          drop-shadow(0 0 4px rgba(255,255,255,0.50))
-          drop-shadow(0 0 7px rgba(248,230,200,0.22));
-      }
-
-      64% {
-        opacity: calc(var(--opacity) * 0.34);
-        transform: scale(0.60);
-        filter:
-          brightness(0.98)
-          drop-shadow(0 0 2px rgba(255,255,255,0.18))
-          drop-shadow(0 0 3px rgba(248,230,200,0.10));
-      }
-
-      74% {
-        opacity: calc(var(--opacity) * 0.68);
-        transform: scale(0.88);
-        filter:
-          brightness(1.30)
-          drop-shadow(0 0 3px rgba(255,255,255,0.44))
-          drop-shadow(0 0 6px rgba(248,230,200,0.20));
-      }
-
-    82% {
-  opacity: calc(var(--opacity) * 0.78);
-  transform: scale(0.96);
-  filter:
-    brightness(1.48)
-    drop-shadow(0 0 3px rgba(255,255,255,0.50))
-    drop-shadow(0 0 5px rgba(248,230,200,0.18));
-}
-
-      90% {
-        opacity: calc(var(--opacity) * 0.46);
-        transform: scale(0.66);
-        filter:
-          brightness(1.00)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 4px rgba(248,230,200,0.12));
-      }
-
-      100% {
-        opacity: calc(var(--opacity) * 0.22);
-        transform: scale(0.50);
-        filter:
-          brightness(0.95)
-          drop-shadow(0 0 1px rgba(255,255,255,0.18))
-          drop-shadow(0 0 2px rgba(248,230,200,0.10));
-      }
+      0%   { opacity: calc(var(--opacity) * 0.18); transform: scale(0.45); }
+      16%  { opacity: calc(var(--opacity) * 0.85); transform: scale(1.02); }
+      30%  { opacity: calc(var(--opacity) * 0.72); transform: scale(0.92); }
+      38%  { opacity: calc(var(--opacity) * 0.88); transform: scale(1.04); }
+      56%  { opacity: calc(var(--opacity) * 0.76); transform: scale(0.94); }
+      74%  { opacity: calc(var(--opacity) * 0.68); transform: scale(0.88); }
+      82%  { opacity: calc(var(--opacity) * 0.78); transform: scale(0.96); }
+      100% { opacity: calc(var(--opacity) * 0.22); transform: scale(0.50); }
     }
   `;
   document.head.appendChild(style);

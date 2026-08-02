@@ -11,22 +11,22 @@
        주소가 바뀌면 아래 https://hjlovesb.github.io/1017wedding/ 부분을 함께 고쳐 주세요. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="이현준 ♥ 박상빈 결혼합니다" />
-  <meta property="og:url" content="https://hjlovesb.github.io/1017wedding/senior/" />
+  <meta property="og:url" content="https://hjlovesb.github.io/WEDDING1017_LOVE/" />
   <meta property="og:title" id="og-title" content="이현준 ♥ 박상빈 결혼합니다" />
   <meta property="og:description" id="og-description" content="2026. 10. 17 Sat 4:20pm" />
-  <meta property="og:image" id="og-image" content="https://hjlovesb.github.io/1017wedding/images/og/1.jpg" />
-  <meta property="og:image:secure_url" content="https://hjlovesb.github.io/1017wedding/images/og/1.jpg" />
+  <meta property="og:image" id="og-image" content="https://hjlovesb.github.io/WEDDING1017_LOVE/images/intro/wedding-cover.jpg" />
+  <meta property="og:image:secure_url" content="https://hjlovesb.github.io/WEDDING1017_LOVE/images/intro/wedding-cover.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="941" />
-  <meta property="og:image:height" content="1118" />
+  <meta property="og:image:height" content="1672" />
   <meta property="og:locale" content="ko_KR" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="이현준 ♥ 박상빈 결혼합니다" />
   <meta name="twitter:description" content="2026. 10. 17 (Sat) PM 4:20 · 나비스퀘어 나비홀" />
-  <meta name="twitter:image" content="https://hjlovesb.github.io/1017wedding/images/og/1.jpg" />
+  <meta name="twitter:image" content="https://hjlovesb.github.io/WEDDING1017_LOVE/images/intro/wedding-cover.jpg" />
 
-  <link rel="canonical" href="https://hjlovesb.github.io/1017wedding/senior/" />
+  <link rel="canonical" href="https://hjlovesb.github.io/WEDDING1017_LOVE/" />
 
   <title id="page-title">모바일 청첩장</title>
 
@@ -396,13 +396,12 @@
         });
       }
       forceEagerImages();
-      // 나중에 추가되는 이미지(갤러리, 달력 등)에도 동일하게 적용
-      if (window.MutationObserver) {
-        new MutationObserver(forceEagerImages).observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-        });
-      }
+      // 갤러리/달력처럼 나중에 추가되는 이미지까지 챙기되, 문서 전체를
+      // 계속 감시하는 무거운 방식(MutationObserver) 대신 몇 번만 다시
+      // 확인합니다 — 모바일에서 성능 부담을 줄이기 위함입니다.
+      [300, 800, 1600, 3000].forEach(function (t) {
+        setTimeout(forceEagerImages, t);
+      });
     })();
   </script>
 
