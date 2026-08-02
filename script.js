@@ -1506,27 +1506,9 @@ async function initStoryPost() {
         copyToClipboard(shareData.url, '청첩장 링크가 복사되었습니다. 카카오톡에 붙여넣어 주세요.');
       }
 
-      // 1순위: 카카오 SDK (config.js에 appKey를 넣으면 카카오톡 공유창이 바로 열립니다)
-      try {
-        if (window.Kakao && CONFIG.kakaoShare && CONFIG.kakaoShare.appKey) {
-          if (!Kakao.isInitialized()) Kakao.init(CONFIG.kakaoShare.appKey);
-          Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-              title: shareData.title,
-              description: shareData.text,
-              imageUrl: new URL('images/intro/og-link-senior.jpg', window.location.href).href,
-              link: { mobileWebUrl: shareData.url, webUrl: shareData.url }
-            },
-            buttons: [{
-              title: '청첩장 보기',
-              link: { mobileWebUrl: shareData.url, webUrl: shareData.url }
-            }]
-          });
-          return;
-        }
-      } catch (e) { /* 아래 공유 시트/복사로 폴백 */ }
-
+      // 카카오 SDK 기본 피드 템플릿은 이미지 아래에 별도 문구/버튼 박스를
+    // 강제로 만들기 때문에 사용하지 않습니다. 휴대폰 기본 공유로 URL만 전달하면
+    // 카카오톡이 index.html의 Open Graph 이미지를 그대로 큰 링크 미리보기로 표시합니다.
       // 2순위: 휴대폰 기본 공유 시트 (카카오톡 선택 가능)
       // 안드로이드 일부 브라우저(특히 삼성 인터넷)는 navigator.share 가
       // Promise 거부가 아니라 "동기적으로" 예외를 던지는 경우가 있습니다.
@@ -1536,7 +1518,7 @@ async function initStoryPost() {
       // 항상 .catch 로만 처리되도록 통일합니다.
       if (navigator.share) {
         Promise.resolve()
-          .then(() => navigator.share(shareData))
+          .then(() => navigator.share({ url: shareData.url }))
           .catch((e) => {
             if (e && e.name === 'AbortError') return; // 사용자가 공유 시트를 직접 취소
             doClipboardFallback();
