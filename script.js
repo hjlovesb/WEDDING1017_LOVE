@@ -2142,7 +2142,7 @@ async function initStoryPost() {
   function createSparkles() {
     layer.innerHTML = "";
 
-    const count = 65;
+    const count = 55;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");

@@ -14277,7 +14277,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 #curtain.curtain.is-ready {
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.10), rgba(17, 15, 13, 0.18)),
-    url('images/intro/intro-bg-senior.jpg?v=2') center center / cover no-repeat !important;
+    url('images/intro/intro-bg-senior.jpg?v=3') center center / cover no-repeat !important;
 }
 
 
@@ -14462,4 +14462,30 @@ body, p, span, div, a, button, h1, h2, h3 {
 #curtain .curtain__seal-hit::before,
 #curtain .curtain__seal-ring::after {
   display: none !important;
+}
+
+/* 인트로 봉투 밑에 계속 보인다는 붉은/분홍 원형 장식 — 관련될 수 있는
+   모든 가상요소를 한 번에 확실히 제거(어떤 것이 진짜 원인이든 대응) */
+#curtain .curtain__content::before,
+#curtain .curtain__content::after,
+#curtain .curtain__frame::after,
+.curtain__content::before,
+.curtain__content::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
+
+/* 참석여부 팝업 — 좀 더 크게, 안내문구 마지막 줄이 팝업 밖으로
+   튀어나가지 않도록 아래쪽 여백 확보 */
+.rsvp-modal__panel {
+  width: min(92vw, 360px) !important;
+  max-width: none !important;
+}
+.rsvp-card {
+  padding-bottom: 4% !important;
+}
+.rsvp-modal__summary {
+  margin-bottom: 14px !important;
 }
