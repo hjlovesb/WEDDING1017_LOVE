@@ -561,6 +561,7 @@ async function initCalendar() {
   const photoImg = document.getElementById('dcal-photo-img');
   if (photoImg) {
     const src = await resolveFirstImage([
+      'images/calendar/1-senior.jpg',
       'images/calendar/1.jpg'
     ]);
     photoImg.src = src;
