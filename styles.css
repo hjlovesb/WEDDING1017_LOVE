@@ -14374,12 +14374,26 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 
 /* 계좌 복사 버튼 — 내용이 길어도 버튼이 눌리거나 줄 위치가 흔들리지
-   않도록 항상 같은 자리(오른쪽)에 고정 */
+   않도록 항상 같은 자리(오른쪽)에 고정. 버튼은 고정 폭, 정보 영역은
+   남는 공간을 전부 차지하게 해서 버튼이 항상 정확히 같은 x좌표에 오게
+   합니다(이전엔 이유 없이 버튼마다 폭이 미세하게 달라질 수 있었음) */
 .account-item {
   align-items: center !important;
+  justify-content: space-between !important;
+}
+.account-item__info {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
 }
 .account-item__copy {
   flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  width: 58px !important;
+  min-width: 58px !important;
+  max-width: 58px !important;
+  padding: 6px 0 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
 }
 
 /* Our Beginning — 부모님 이름만 크게(의 아들/딸은 그대로), 절대 줄바꿈 안 되게 */
