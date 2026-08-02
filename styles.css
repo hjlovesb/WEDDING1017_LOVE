@@ -10293,7 +10293,7 @@ html.viewer-open, html.viewer-open body { overflow: hidden !important; overscrol
 .section .section__title,
 .section .section__title.script-font,
 h2.section__title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 500 !important;
   font-size: 1.56rem !important;
@@ -10402,7 +10402,7 @@ body .section .section__title.script-font,
 body h2.section__title,
 body #greeting-title,
 body #greeting .section__title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 600 !important;            /* 진하게 */
   font-size: 1.56rem !important;
