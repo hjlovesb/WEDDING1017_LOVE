@@ -116,7 +116,7 @@
     <section class="section greeting" id="greeting">
       <div class="section__inner anim-target">
         <h2 class="section__title script-font" id="greeting-title"></h2>
-        <img class="greeting__rose" src="../images/greeting/rose.png" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="greeting__rose" src="../images/greeting/rose.png" alt="" aria-hidden="true" loading="eager" decoding="sync" draggable="false" />
         <p class="greeting__poem" id="greeting-poem"></p>
         <span class="greeting__rule" aria-hidden="true"></span>
         <p class="greeting__text" id="greeting-text"></p>
@@ -244,7 +244,7 @@
 
         <div class="info__panel is-on" data-info-panel="meal">
           <figure class="info__photo">
-            <img src="../images/info/dining.jpg" alt="연회장 식사" loading="lazy" decoding="async" draggable="false" />
+            <img src="../images/info/dining.jpg" alt="연회장 식사" loading="eager" decoding="sync" draggable="false" />
           </figure>
           <p class="info__text">
             귀한 걸음 해주신 여러분을 위해<br />
@@ -255,7 +255,7 @@
 
         <div class="info__panel" data-info-panel="notice">
           <figure class="info__photo">
-            <img src="../images/info/notice.jpg" alt="쌀화환 안내" loading="lazy" decoding="async" draggable="false" />
+            <img src="../images/info/notice.jpg" alt="쌀화환 안내" loading="eager" decoding="sync" draggable="false" />
           </figure>
           <p class="info__text">
             나비스퀘어는 <b>쌀화환</b>만 가능합니다.<br />
@@ -382,6 +382,29 @@
       </div>
     </section>
   </div>
+
+  <!-- 시니어판: 브라우저의 "느린 연결에서 이미지 지연로딩" 개입 때문에
+       일부 사진이 ? 아이콘으로 안 뜨는 문제가 있었습니다(카카오톡
+       인앱 브라우저 등에서 재현됨). 페이지의 모든 이미지에 즉시
+       loading=eager를 강제로 걸어서 이 개입을 원천적으로 막습니다. -->
+  <script>
+    (function () {
+      function forceEagerImages() {
+        document.querySelectorAll('img').forEach(function (img) {
+          img.loading = 'eager';
+          try { img.decoding = 'sync'; } catch (e) {}
+        });
+      }
+      forceEagerImages();
+      // 나중에 추가되는 이미지(갤러리, 달력 등)에도 동일하게 적용
+      if (window.MutationObserver) {
+        new MutationObserver(forceEagerImages).observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
+    })();
+  </script>
 
   <!-- Mobile-safe intro fallback: works even when an optional script fails -->
   <script>

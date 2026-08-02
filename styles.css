@@ -14128,7 +14128,7 @@ body:not(.intro-active) .invitation {
 /* ─── 2) OUR STORY — 요청에 따라 힌트 모션은 걷어내고 원래대로 둡니다 ─── */
 
 /* 2026 은빛 글자 — 조금 더 위로, 줄간격 최소화, WEDDING DAY 자간 살짝 여유·크기 확대 */
-.card__yr { bottom: 25% !important; gap: 0 !important; }
+.card__yr { bottom: 23.5% !important; gap: 0 !important; }
 .card__yr i, .card__yr b {
   font-size: clamp(1.65rem, 7.8vw, 2.35rem) !important;
   font-weight: 300 !important;
@@ -14267,7 +14267,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 
 #curtain .curtain__hint-kr {
-  font-size: 1.3rem !important;
+  font-size: 1.0rem !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -14299,9 +14299,9 @@ body, p, span, div, a, button, h1, h2, h3 {
   display: none !important;
 }
 .dcal__grid {
-  column-gap: 13px !important;
-  row-gap: 16px !important;
-  max-width: 380px !important;
+  column-gap: 2px !important;
+  row-gap: 7px !important;
+  max-width: 280px !important;
   width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
@@ -14310,7 +14310,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 .dcal__day {
   justify-content: center !important;
   text-align: center !important;
-  height: 40px !important;
+  height: 31px !important;
 }
 .dcal__day i {
   font-size: 1.3rem !important;
@@ -14324,17 +14324,21 @@ body, p, span, div, a, button, h1, h2, h3 {
   width: 34px !important;
   height: 34px !important;
 }
-/* 월 제목 — 숫자(10)는 더 크게, "월" 글자는 작게 */
+/* 월 제목 — 숫자(10)는 조금 작게, "월" 글자는 조금 크게 */
 .dcal__month {
-  font-size: 2rem !important;
+  font-size: 2.0rem !important;
 }
 .dcal__month-unit {
-  font-size: 0.75rem !important;
+  font-size: 0.95rem !important;
   margin-left: 2px;
 }
 /* "결혼식까지 N일 남았습니다" 문구는 더 작게 */
 .dcal__dday {
   font-size: 0.72rem !important;
+  color: #9c8f78 !important;
+}
+.dcal__dday b {
+  color: #9c8f78 !important;
 }
 
 /* 계좌(Celebration) — 은행명/계좌번호가 커진 시니어 폰트에서 한 줄을
@@ -14361,12 +14365,21 @@ body, p, span, div, a, button, h1, h2, h3 {
 .location-transport__line.is-label,
 .location-transport__line.is-sub,
 .location-transport__line.is-note {
-  font-size: 1rem !important;
+  font-size: 0.78rem !important;
   white-space: normal !important;
 }
 .location-transport__detail {
-  font-size: 0.78rem !important;
+  font-size: 0.68rem !important;
   white-space: nowrap !important;
+}
+
+/* 계좌 복사 버튼 — 내용이 길어도 버튼이 눌리거나 줄 위치가 흔들리지
+   않도록 항상 같은 자리(오른쪽)에 고정 */
+.account-item {
+  align-items: center !important;
+}
+.account-item__copy {
+  flex-shrink: 0 !important;
 }
 
 /* Our Beginning — 부모님 이름만 크게(의 아들/딸은 그대로), 절대 줄바꿈 안 되게 */
@@ -14421,4 +14434,26 @@ body, p, span, div, a, button, h1, h2, h3 {
 .gline--gap {
   display: block;
   height: 2.6rem;
+}
+
+/* 마음 전하실 곳 — 안내문구를 계좌 박스(아코디언, max-width:400px으로
+   가운데 정렬됨)와 똑같은 폭·정렬로 맞춰서 왼쪽 시작선을 일치시킵니다 */
+.account__subtitle {
+  text-align: left !important;
+  max-width: 400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  text-indent: 0 !important;
+}
+
+/* Our Story 2026 카드 — 실버로 빛나는 "WEDDING DAY / 2026.10.17" 글자가
+   시니어판의 커진 기준폰트(21px) 때문에 카드 밖으로 잘려 보이던 문제 —
+   폰트를 줄여서 카드 안에 온전히 들어오게 합니다 */
+.card__yr i,
+.card__yr b {
+  font-size: 1.95rem !important;
+}
+.card__yr i {
+  font-size: 2.3rem !important;
 }

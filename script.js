@@ -298,6 +298,15 @@ function initCurtain() {
     });
   }
 
+  // 시니어판: 작은 실링 버튼뿐 아니라, 봉투 전체나 "청첩장 열기" 글자
+  // 영역 어디를 눌러도 열리게 합니다 — 어르신들은 정확한 버튼 위치를
+  // 못 찾고 이곳저곳 누르시는 경우가 많습니다.
+  curtain.addEventListener('click', (event) => {
+    if (introClosed) return;
+    if (openBtn && (event.target === openBtn || openBtn.contains(event.target))) return;
+    closeIntro();
+  });
+
   autoTimer = setTimeout(() => closeIntro(), AUTO_OPEN_DELAY);
 }
 
@@ -2243,7 +2252,7 @@ async function initStoryPost() {
   function createSparkles() {
     layer.innerHTML = "";
 
-    const count = 100;
+    const count = 70;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");
