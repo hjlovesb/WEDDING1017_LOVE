@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@200;300;400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'Ortica Linear';
@@ -9987,7 +9987,7 @@ html.viewer-open, html.viewer-open body { overflow: hidden !important; overscrol
 /* ─── 공통: 소제목 통일 (컬러 유지 · 이탤릭 세리프 · 크게) ── */
 .section__title,
 .section__title.script-font {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 500 !important;
   font-size: 1.72rem !important;
@@ -14456,4 +14456,10 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 .card__yr i {
   font-size: 2.3rem !important;
+}
+
+/* 인트로 봉투 아래 나타나던 은은한 원형 광채 장식들을 요청에 따라 제거 */
+#curtain .curtain__seal-hit::before,
+#curtain .curtain__seal-ring::after {
+  display: none !important;
 }
