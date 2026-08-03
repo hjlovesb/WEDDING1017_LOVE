@@ -12262,7 +12262,7 @@ body .section .section__title::after { content: none !important; display: none !
   cursor: pointer;
 }
 
-.card.is-current { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+.card.is-current { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); z-index: 999 !important; }
 
 .card__inner {
   position: relative;
@@ -13742,7 +13742,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 0.25s linear infinite !important;
+  animation: silverFlow 0.15s linear infinite !important;
 }
 
 .card__yr i,
@@ -13824,7 +13824,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 0.25s linear infinite !important;
+  animation: silverFlow 0.15s linear infinite !important;
 }
 
 /* 흐름이 서로 살짝 어긋나 더 자연스럽게 */
@@ -14564,7 +14564,7 @@ body, p, span, div, a, button, h1, h2, h3 {
     box-shadow: 0 0 0 0px rgba(210, 206, 198, 0), 0 0 0px 0 rgba(210, 206, 198, 0);
   }
   50% {
-    box-shadow: 0 0 0 1.5px rgba(228, 223, 213, 0.8), 0 0 26px 7px rgba(218, 212, 200, 0.7);
+    box-shadow: 0 0 0 2px rgba(230, 225, 215, 0.95), 0 0 30px 4px rgba(220, 214, 202, 0.9);
   }
 }
 /* 카드 표면 위로 부드러운 광택이 한 번씩 스치듯 지나가며 더 고급스럽게.
@@ -14576,16 +14576,16 @@ body, p, span, div, a, button, h1, h2, h3 {
   pointer-events: none;
   z-index: 7;
   background: linear-gradient(
-    115deg,
-    transparent 15%,
-    rgba(255, 253, 248, 0.04) 34%,
-    rgba(255, 253, 248, 0.2) 47%,
-    rgba(255, 253, 248, 0.04) 60%,
-    transparent 80%
+    118deg,
+    transparent 22%,
+    rgba(255, 253, 248, 0.03) 38%,
+    rgba(255, 253, 248, 0.13) 48%,
+    rgba(255, 253, 248, 0.03) 58%,
+    transparent 74%
   );
   background-size: 280% 280%;
   background-position: 120% 0%;
-  animation: cardSheen 6.5s ease-in-out infinite;
+  animation: cardSheen 7s ease-in-out infinite;
 }
 @keyframes cardSheen {
   0%   { background-position: 150% 0%; }
@@ -14620,4 +14620,15 @@ body, p, span, div, a, button, h1, h2, h3 {
 @keyframes cardNudgeSlide {
   0%, 100% { left: 0; }
   50%      { left: 10px; }
+}
+
+/* 우리의 이야기 카드 스테이지 — 옆 카드가 살짝 삐져나와 보이던 문제를
+   overflow:hidden으로 해결하려 했으나 반짝임 효과까지 깨져서 되돌림 */
+
+/* 카드 가장자리가 오른쪽만 유독 다르게 보이던 문제 — 사진 자체의
+   비대칭한 음영 때문으로 보여, 사방에 똑같은 은은한 음영을 둘러줘서
+   어느 쪽도 다르지 않게 통일합니다(딱딱한 선이 아니라 부드러운 느낌) */
+.card__inner {
+  border: none !important;
+  box-shadow: inset 0 0 0 1px rgba(120, 110, 95, 0.06), 0 1px 6px rgba(80, 70, 58, 0.08) !important;
 }
