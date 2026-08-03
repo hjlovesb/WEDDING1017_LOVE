@@ -290,23 +290,40 @@
       </div>
     </section>
 
-    <!-- ── 참석여부 전달 버튼 (팝업은 이 버튼을 눌러야만 뜹니다) ── -->
+    <!-- ── 참석여부 안내 및 전달 — 버튼 없이 항상 화면에 보이도록 배치 ── -->
     <section class="section rsvp-trigger" id="rsvp-trigger-section">
       <div class="section__inner anim-target">
-        <button type="button" class="rsvp-trigger__btn" id="rsvp-trigger-btn">참석여부 전달하기</button>
+        <div class="rsvp-modal__panel rsvp-inline-card">
+          <div class="rsvp-card">
+          <p class="rsvp-modal__date" id="rsvp-title"><span class="rsvp-date-num">2026. 10. 17</span> (토) 오후 <span class="rsvp-date-num">4</span>시 <span class="rsvp-date-num">20</span>분</p>
+
+          <p class="rsvp-modal__summary">
+            참석해 주시는 분들을<br />
+            소중히 모시고자 합니다.<br />
+            참석여부를 알려주시면 감사하겠습니다.
+          </p>
+
+          <span class="rsvp-rule" aria-hidden="true"></span>
+
+          <form class="rsvp-form" id="rsvp-form">
+            <input class="rsvp-input" id="rsvp-name" name="name" type="text" placeholder="성함" maxlength="20" autocomplete="name" required />
+
+            <div class="rsvp-choice-group" role="radiogroup" aria-label="참석 여부">
+              <input id="rsvp-attend" name="attendance" type="radio" value="attend" checked />
+              <label for="rsvp-attend">참석</label>
+
+              <input id="rsvp-absent" name="attendance" type="radio" value="absent" />
+              <label for="rsvp-absent">불참</label>
+            </div>
+
+            <button class="rsvp-submit" id="rsvp-submit" type="submit">전달하기</button>
+
+            <p class="rsvp-message" id="rsvp-message" aria-live="polite"></p>
+          </form>
+          </div>
+        </div>
       </div>
     </section>
-    <script>
-      (function () {
-        var btn = document.getElementById('rsvp-trigger-btn');
-        if (!btn) return;
-        btn.addEventListener('click', function () {
-          if (typeof window.openAttendModal === 'function') {
-            window.openAttendModal();
-          }
-        });
-      })();
-    </script>
 
     <!-- ── Footer: 연베이지 배경 위 나비 사진(원본 크기) + 하단으로 갈수록 진해지는 톤
          공유 버튼은 나비 사진이 끝나는 아래에 여유 있게 배치됩니다. ── -->
@@ -345,39 +362,7 @@
 
   <!-- 시니어판: 참석여부 팝업은 자동으로 뜨지 않고, "마음 전하실 곳"
        섹션 아래 버튼을 눌러야만 뜹니다. -->
-  <div class="rsvp-modal" id="attendModal" aria-hidden="true">
-    <div class="rsvp-modal__backdrop" data-rsvp-close></div>
-
-    <section class="rsvp-modal__panel" role="dialog" aria-modal="true" aria-labelledby="rsvp-title">
-      <div class="rsvp-card">
-        <p class="rsvp-modal__date" id="rsvp-title"><span class="rsvp-date-num">2026. 10. 17</span> (토) 오후 <span class="rsvp-date-num">4</span>시 <span class="rsvp-date-num">20</span>분</p>
-
-        <p class="rsvp-modal__summary">
-          참석해 주시는 분들을<br />
-          소중히 모시고자 합니다.<br />
-          참석여부를 알려주시면 감사하겠습니다.
-        </p>
-
-        <span class="rsvp-rule" aria-hidden="true"></span>
-
-        <form class="rsvp-form" id="rsvp-form">
-          <input class="rsvp-input" id="rsvp-name" name="name" type="text" placeholder="성함" maxlength="20" autocomplete="name" required />
-
-          <div class="rsvp-choice-group" role="radiogroup" aria-label="참석 여부">
-            <input id="rsvp-attend" name="attendance" type="radio" value="attend" checked />
-            <label for="rsvp-attend">참석</label>
-
-            <input id="rsvp-absent" name="attendance" type="radio" value="absent" />
-            <label for="rsvp-absent">불참</label>
-          </div>
-
-          <button class="rsvp-submit" id="rsvp-submit" type="submit">전달하기</button>
-
-          <p class="rsvp-message" id="rsvp-message" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-  </div>
+  <!-- 참석여부 폼은 이제 팝업이 아니라 본문에 항상 보이도록 위로 옮겨졌습니다 -->
 
   <!-- 시니어판: 브라우저의 "느린 연결에서 이미지 지연로딩" 개입 때문에
        일부 사진이 ? 아이콘으로 안 뜨는 문제가 있었습니다(카카오톡

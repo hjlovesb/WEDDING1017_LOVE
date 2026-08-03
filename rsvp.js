@@ -7,9 +7,6 @@
   'use strict';
 
   function initRsvp() {
-    const modal = document.getElementById('attendModal');
-    if (!modal) return;
-
     const form = document.getElementById('rsvp-form');
     const message = document.getElementById('rsvp-message');
     const attendRadio = document.getElementById('rsvp-attend');
@@ -19,18 +16,11 @@
     const minusBtn = document.getElementById('rsvp-minus');
     const plusBtn = document.getElementById('rsvp-plus');
     const helpEl = document.getElementById('rsvp-help');
-    const hideToday = document.getElementById('rsvp-hide-today');
     const nameInput = document.getElementById('rsvp-name');
 
-    // 한 번이라도 참석/불참을 "전달하기"로 제출한 사람에게는 영구히 다시 뜨지 않고,
-    // 제출하지 않고 닫은 경우엔 "오늘 하루 보지 않기"를 체크했을 때만 오늘 하루 숨깁니다.
+    // 한 번이라도 참석/불참을 "전달하기"로 제출한 사람에게는 폼이 다시
+    // 나타나지 않고 완료 문구만 보이도록 합니다.
     const SUBMITTED_KEY = 'wedding_rsvp_submitted';
-    const HIDE_TODAY_KEY = 'wedding_rsvp_hide_date';
-
-    function todayStamp() {
-      const d = new Date();
-      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    }
 
     function hasSubmitted() {
       try {
@@ -43,21 +33,6 @@
     function markSubmitted() {
       try {
         localStorage.setItem(SUBMITTED_KEY, '1');
-      } catch (e) {}
-    }
-
-    function isHiddenToday() {
-      try {
-        return localStorage.getItem(HIDE_TODAY_KEY) === todayStamp();
-      } catch (e) {
-        return false;
-      }
-    }
-
-    function storeHideToday() {
-      if (!hideToday || !hideToday.checked) return;
-      try {
-        localStorage.setItem(HIDE_TODAY_KEY, todayStamp());
       } catch (e) {}
     }
 
@@ -94,32 +69,21 @@
       message.classList.remove('is-success', 'is-error');
     }
 
-    window.openAttendModal = function () {
-      if (hasSubmitted() || isHiddenToday()) return false;
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-      if (hideToday) hideToday.checked = false;   // 새로고침 시 체크 상태가 남지 않도록
-      updateCounterState();
-      resetMessage();
-      return true;
-    };
-
-    function closeModal() {
-      storeHideToday();
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-      // 팝업이 닫힌 뒤에 본문 모션이 시작됩니다.
-      window.dispatchEvent(new CustomEvent('rsvp:closed'));
-    }
-
-    modal.querySelectorAll('[data-rsvp-close]').forEach((el) => {
-      el.addEventListener('click', closeModal);
-    });
+    window.openAttendModal = function () { return false; };
 
     if (minusBtn) minusBtn.addEventListener('click', () => setCount(getCount() - 1));
     if (plusBtn) plusBtn.addEventListener('click', () => setCount(getCount() + 1));
     if (attendRadio) attendRadio.addEventListener('change', updateCounterState);
     if (absentRadio) absentRadio.addEventListener('change', updateCounterState);
+
+    // 이미 제출한 적이 있다면 폼 대신 완료 안내만 보여줍니다.
+    if (hasSubmitted() && form) {
+      form.style.display = 'none';
+      if (message) {
+        message.textContent = '참석여부를 이미 전달해 주셨습니다. 감사합니다.';
+        message.classList.add('is-success');
+      }
+    }
 
     if (form) {
       form.addEventListener('submit', (e) => {
@@ -143,8 +107,6 @@
           message.classList.add('is-success');
         }
         markSubmitted();
-        // 전달 완료 후 곧바로 팝업을 닫습니다(사용자가 완료 메시지를 잠깐 볼 수 있도록 살짝 지연).
-        setTimeout(closeModal, 700);
       });
     }
 

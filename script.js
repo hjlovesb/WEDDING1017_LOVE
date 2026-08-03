@@ -1708,7 +1708,9 @@ async function initStoryPost() {
         function refreshMapSize() {
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(function () {
-            naver.maps.Event.trigger(map, 'resize');
+            try {
+              naver.maps.Event.trigger(map, 'resize');
+            } catch (e) {}
           }, 120);
         }
 

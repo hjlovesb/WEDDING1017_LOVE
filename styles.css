@@ -14562,10 +14562,10 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 @keyframes cardGlowRing {
   0%, 100% {
-    box-shadow: 0 0 0 0px rgba(255, 255, 255, 0), 0 0 0px 0 rgba(220, 225, 230, 0);
+    box-shadow: 0 0 0 0px rgba(224, 200, 160, 0), 0 0 0px 0 rgba(224, 200, 160, 0);
   }
   50% {
-    box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.6), 0 0 38px 2px rgba(255, 255, 252, 0.95);
+    box-shadow: 0 0 0 1px rgba(240, 232, 216, 0.85), 0 0 30px 3px rgba(224, 220, 208, 0.85);
   }
 }
 /* 카드 표면 위로 부드러운 광택이 한 번씩 스치듯 지나가며 더 고급스럽게.
@@ -14651,4 +14651,30 @@ body:has(.viewer.is-active) {
 .viewer__backdrop {
   background: #000 !important;
   opacity: 1 !important;
+}
+
+/* 참석여부 팝업을 버튼 뒤에 숨기지 않고 본문에 항상 보이도록 이 자리에
+   그대로 옮겨왔습니다. 모달이 아니므로 화면 높이 제한/스크롤은 풀고,
+   화면에 더 잘 보이도록 폭도 살짝 넉넉하게 둡니다 */
+.rsvp-inline-card.rsvp-modal__panel {
+  position: relative !important;
+  width: min(94%, 360px) !important;
+  max-width: 360px !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 0 auto !important;
+  background: url('images/popup/rsvp-frame.png') center / 100% 100% no-repeat !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 15% 12% !important;
+}
+#rsvp-trigger-section.anim-target,
+#rsvp-trigger-section .anim-target {
+  opacity: 1 !important;
+  transform: none !important;
+}
+#rsvp-trigger-section .section__inner {
+  display: flex;
+  justify-content: center;
 }
