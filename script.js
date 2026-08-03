@@ -1084,6 +1084,7 @@ function initViewer() {
   }
 
   function normalize() {
+    clearTimeout(go._fallbackTimer);
     const n = galleryImages.length;
     if (virtualIndex === 0) {
       virtualIndex = n;
@@ -1103,6 +1104,14 @@ function initViewer() {
     virtualIndex += dir;
     realIndex = (realIndex + dir + galleryImages.length) % galleryImages.length;
     snap(true);
+    // 안전장치: 어떤 이유로든(빠르게 연속 넘기기, 일부 브라우저 환경 등)
+    // transitionend가 발생하지 않으면 마지막 사진 이후로 넘어가지 않고
+    // 멈춰버리는 문제가 있었습니다. 애니메이션 시간보다 살짝 더 기다린
+    // 뒤, 아직 정리가 안 되어 있으면 강제로 normalize()를 실행합니다.
+    clearTimeout(go._fallbackTimer);
+    go._fallbackTimer = setTimeout(() => {
+      if (animating) normalize();
+    }, 720);
   }
 
   function open(startIndex = 0) {
@@ -1358,10 +1367,17 @@ async function initStoryPost() {
     });
     dots.forEach(function (dot, i2) { dot.classList.toggle('is-on', i2 === cur); });
     if (hint) {
-      if (cards[cur].getAttribute('data-flip') === '0') hint.textContent = '';
-      else hint.textContent = cards[cur].classList.contains('is-flipped')
-        ? '옆으로 넘겨 보세요'
-        : '엽서를 눌러 뒤집어 보세요';
+      const isFlippedCard = cards[cur].classList.contains('is-flipped');
+      if (cards[cur].getAttribute('data-flip') === '0') {
+        hint.innerHTML = '';
+        hint.classList.remove('cards__hint--slide');
+      } else if (isFlippedCard) {
+        hint.innerHTML = '옆으로 넘겨 보세요';
+        hint.classList.add('cards__hint--slide');
+      } else {
+        hint.innerHTML = '뒷면을 누르세요';
+        hint.classList.remove('cards__hint--slide');
+      }
     }
   }
 

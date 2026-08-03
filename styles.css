@@ -12458,14 +12458,14 @@ body .section .section__title::after { content: none !important; display: none !
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: silverFlow 14s ease-in-out infinite;
+  animation: silverFlow 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
   pointer-events: none;
   z-index: 2;
 }
 
 @keyframes silverFlow {
-  0%, 100% { background-position: 12% 50%; }
-  50%      { background-position: 88% 50%; }
+  0%   { background-position: 0% 50%; }
+  100% { background-position: -240% 50%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -13742,7 +13742,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 14s ease-in-out infinite !important;
+  animation: silverFlow 0.25s linear infinite !important;
 }
 
 .card__yr i,
@@ -13824,7 +13824,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 14s ease-in-out infinite !important;
+  animation: silverFlow 0.25s linear infinite !important;
 }
 
 /* 흐름이 서로 살짝 어긋나 더 자연스럽게 */
@@ -14502,4 +14502,122 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 .rsvp-modal__summary {
   margin-bottom: 14px !important;
+}
+
+/* 우리의 이야기 — 엽서 옆으로 넘기는 화살표/점 네비게이션 숨김
+   (어르신들이 이걸로만 넘기고 뒤집기를 발견 못 하셔서 제거) */
+.cards__nav {
+  display: none !important;
+}
+
+/* 아직 안 뒤집힌 엽서 테두리에 확실하게 보이는 은은한 은빛 광채를 줍니다.
+   (기존 카드에 box-shadow: ... !important 가 걸려 있어서 그 속성을
+   직접 애니메이션하면 항상 무시됐습니다 — 그래서 별도의 테두리
+   레이어를 새로 만들어 그 위에 반짝이게 합니다) */
+.card.is-current:not(.is-flipped)[data-flip="1"],
+.card.is-current[data-flip="0"] {
+  position: relative;
+  overflow: visible !important;
+}
+.card.is-current:not(.is-flipped)[data-flip="1"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 6;
+  animation: cardGlowRing 2.8s ease-in-out infinite;
+}
+.card.is-current[data-flip="0"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 6;
+  animation: cardBorderFlow 6s ease-in-out infinite;
+}
+@keyframes cardBorderFlow {
+  0%, 100% {
+    box-shadow: 6px 0 18px 2px rgba(238, 234, 224, 0.75);
+  }
+  25% {
+    box-shadow: 0 6px 18px 2px rgba(238, 234, 224, 0.75);
+  }
+  50% {
+    box-shadow: -6px 0 18px 2px rgba(238, 234, 224, 0.75);
+  }
+  75% {
+    box-shadow: 0 -6px 18px 2px rgba(238, 234, 224, 0.75);
+  }
+}
+@keyframes cardGlowRingMain {
+  0%, 100% {
+    box-shadow: 0 0 0 0px rgba(210, 210, 210, 0), 0 0 0px 0 rgba(210, 210, 210, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 1.5px rgba(232, 227, 216, 0.62), 0 0 20px 4px rgba(224, 218, 204, 0.5);
+  }
+}
+@keyframes cardGlowRing {
+  0%, 100% {
+    box-shadow: 0 0 0 0px rgba(210, 206, 198, 0), 0 0 0px 0 rgba(210, 206, 198, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 1.5px rgba(228, 223, 213, 0.8), 0 0 26px 7px rgba(218, 212, 200, 0.7);
+  }
+}
+/* 카드 표면 위로 부드러운 광택이 한 번씩 스치듯 지나가며 더 고급스럽게.
+   2026(메인) 카드는 조금 더 느긋하고 넓게 스쳐서 특별한 느낌을 줍니다. */
+.card.is-current[data-flip="0"] .card__face--front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+  background: linear-gradient(
+    115deg,
+    transparent 15%,
+    rgba(255, 253, 248, 0.04) 34%,
+    rgba(255, 253, 248, 0.2) 47%,
+    rgba(255, 253, 248, 0.04) 60%,
+    transparent 80%
+  );
+  background-size: 280% 280%;
+  background-position: 120% 0%;
+  animation: cardSheen 6.5s ease-in-out infinite;
+}
+@keyframes cardSheen {
+  0%   { background-position: 150% 0%; }
+  32%  { background-position: -60% 0%; }
+  100% { background-position: -60% 0%; }
+}
+
+/* 힌트 문구도 살짝 은은하게 숨쉬듯 (뒷면을 누르세요 — 앞면 상태) */
+.cards__hint {
+  animation: cardsHintFloat 3.2s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(210, 200, 180, 0.5);
+  letter-spacing: 0.04em;
+}
+@keyframes cardsHintFloat {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+    text-shadow: 0 0 6px rgba(210, 200, 180, 0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+    text-shadow: 0 0 12px rgba(224, 214, 192, 0.65);
+  }
+}
+
+/* 옆으로 넘겨 보세요 — 실제로 좌우로 미끄러지듯 움직이는 모션으로
+   앞면 힌트와 확실히 다르게 표현합니다 */
+.card.is-current.is-flipped[data-flip="1"] {
+  animation: cardNudgeSlide 1.6s ease-in-out infinite;
+}
+@keyframes cardNudgeSlide {
+  0%, 100% { left: 0; }
+  50%      { left: 10px; }
 }
