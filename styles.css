@@ -14355,6 +14355,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 .account-item__name {
   font-size: 0.68rem !important;
   white-space: nowrap !important;
+  letter-spacing: -0.02em !important;
 }
 
 /* 오시는 길 안내 문구 — 소제목 아래 내용들이 항목마다 크기가 제각각이던
@@ -14388,10 +14389,10 @@ body, p, span, div, a, button, h1, h2, h3 {
 .account-item__copy {
   flex-shrink: 0 !important;
   flex-grow: 0 !important;
-  width: 58px !important;
-  min-width: 58px !important;
-  max-width: 58px !important;
-  padding: 6px 0 !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding: 5px 0 !important;
   text-align: center !important;
   box-sizing: border-box !important;
 }
@@ -14561,10 +14562,10 @@ body, p, span, div, a, button, h1, h2, h3 {
 }
 @keyframes cardGlowRing {
   0%, 100% {
-    box-shadow: 0 0 0 0px rgba(210, 206, 198, 0), 0 0 0px 0 rgba(210, 206, 198, 0);
+    box-shadow: 0 0 0 0px rgba(255, 255, 255, 0), 0 0 0px 0 rgba(220, 225, 230, 0);
   }
   50% {
-    box-shadow: 0 0 0 2px rgba(230, 225, 215, 0.95), 0 0 30px 4px rgba(220, 214, 202, 0.9);
+    box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.6), 0 0 38px 2px rgba(255, 255, 252, 0.95);
   }
 }
 /* 카드 표면 위로 부드러운 광택이 한 번씩 스치듯 지나가며 더 고급스럽게.
@@ -14598,6 +14599,7 @@ body, p, span, div, a, button, h1, h2, h3 {
   animation: cardsHintFloat 3.2s ease-in-out infinite;
   text-shadow: 0 0 10px rgba(210, 200, 180, 0.5);
   letter-spacing: 0.04em;
+  font-size: clamp(0.8rem, 3.6vw, 0.92rem) !important;
 }
 @keyframes cardsHintFloat {
   0%, 100% {
@@ -14631,4 +14633,22 @@ body, p, span, div, a, button, h1, h2, h3 {
 .card__inner {
   border: none !important;
   box-shadow: inset 0 0 0 1px rgba(120, 110, 95, 0.06), 0 1px 6px rgba(80, 70, 58, 0.08) !important;
+}
+
+/* 갤러리 확대사진 뷰어 배경 — 완전 불투명하게, 실제 화면 높이까지
+   확실히 덮어서 뒤에 아무것도 안 보이게 함(일반판과 동일) */
+.viewer {
+  height: 100dvh !important;
+  height: 100vh !important;
+}
+html.viewer-open,
+html.viewer-open body {
+  background: #000 !important;
+}
+body:has(.viewer.is-active) {
+  background: #000 !important;
+}
+.viewer__backdrop {
+  background: #000 !important;
+  opacity: 1 !important;
 }
