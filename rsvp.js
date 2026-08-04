@@ -11,12 +11,10 @@
     const message = document.getElementById('rsvp-message');
     const attendRadio = document.getElementById('rsvp-attend');
     const absentRadio = document.getElementById('rsvp-absent');
-    const counter = document.getElementById('rsvp-counter');
-    const countEl = document.getElementById('rsvp-count');
-    const minusBtn = document.getElementById('rsvp-minus');
-    const plusBtn = document.getElementById('rsvp-plus');
-    const helpEl = document.getElementById('rsvp-help');
+    const groomRadio = document.getElementById('rsvp-side-groom');
+    const brideRadio = document.getElementById('rsvp-side-bride');
     const nameInput = document.getElementById('rsvp-name');
+    const countInput = document.getElementById('rsvp-count');
 
     // 한 번이라도 참석/불참을 "전달하기"로 제출한 사람에게는 폼이 다시
     // 나타나지 않고 완료 문구만 보이도록 합니다.
@@ -36,33 +34,6 @@
       } catch (e) {}
     }
 
-    function getCount() {
-      return Number((countEl && countEl.dataset.count) || '1');
-    }
-
-    function setCount(value) {
-      const next = Math.max(1, Math.min(10, Number(value) || 1));
-      if (countEl) {
-        countEl.dataset.count = String(next);
-        countEl.textContent = `${next}명`;
-      }
-    }
-
-    function updateCounterState() {
-      const attending = !!(attendRadio && attendRadio.checked);
-      if (counter) counter.classList.toggle('is-disabled', !attending);
-      if (minusBtn) minusBtn.disabled = !attending;
-      if (plusBtn) plusBtn.disabled = !attending;
-      if (helpEl) {
-        helpEl.textContent = attending ? '본인 포함 참석 인원' : '불참으로 전달됩니다';
-      }
-      if (countEl && !attending) {
-        countEl.textContent = '0명';
-      } else if (countEl && attending) {
-        countEl.textContent = `${getCount()}명`;
-      }
-    }
-
     function resetMessage() {
       if (!message) return;
       message.textContent = '';
@@ -70,11 +41,6 @@
     }
 
     window.openAttendModal = function () { return false; };
-
-    if (minusBtn) minusBtn.addEventListener('click', () => setCount(getCount() - 1));
-    if (plusBtn) plusBtn.addEventListener('click', () => setCount(getCount() + 1));
-    if (attendRadio) attendRadio.addEventListener('change', updateCounterState);
-    if (absentRadio) absentRadio.addEventListener('change', updateCounterState);
 
     // 이미 제출한 적이 있다면 폼 대신 완료 안내만 보여줍니다.
     if (hasSubmitted() && form) {
@@ -98,19 +64,18 @@
           if (nameInput) nameInput.focus();
           return;
         }
+        const side = groomRadio && groomRadio.checked ? '신랑측' : '신부측';
         const attending = !!(attendRadio && attendRadio.checked);
-        const count = attending ? `${getCount()}명` : '불참';
+        const count = Math.max(1, Math.min(9, Number(countInput && countInput.value) || 1));
         if (message) {
           message.textContent = attending
-            ? `${name}님의 참석 의사(${count})가 확인되었습니다.`
-            : `${name}님의 불참 의사가 확인되었습니다.`;
+            ? `${side} ${name}님의 참석 의사(${count}명)가 확인되었습니다.`
+            : `${side} ${name}님의 불참 의사가 확인되었습니다.`;
           message.classList.add('is-success');
         }
         markSubmitted();
       });
     }
-
-    updateCounterState();
   }
 
   if (document.readyState === 'loading') {

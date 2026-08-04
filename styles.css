@@ -14323,6 +14323,7 @@ body, p, span, div, a, button, h1, h2, h3 {
 .dcal__day.is-wedding::after {
   width: 34px !important;
   height: 34px !important;
+  top: 2px !important;
 }
 /* 월 제목 — 숫자(10)는 조금 작게, "월" 글자는 조금 크게 */
 .dcal__month {
@@ -14657,9 +14658,13 @@ body:has(.viewer.is-active) {
    그대로 옮겨왔습니다. 모달이 아니므로 화면 높이 제한/스크롤은 풀고,
    화면에 더 잘 보이도록 폭도 살짝 넉넉하게 둡니다 */
 .rsvp-inline-card.rsvp-modal__panel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
   position: relative !important;
   width: min(94%, 360px) !important;
   max-width: 360px !important;
+  aspect-ratio: 831 / 1176 !important;
   max-height: none !important;
   overflow: visible !important;
   margin: 0 auto !important;
@@ -14668,6 +14673,19 @@ body:has(.viewer.is-active) {
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 15% 12% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.rsvp-inline-card .rsvp-modal__summary {
+  margin-top: -6px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.5 !important;
+  font-size: 0.66rem !important;
+  white-space: nowrap !important;
+}
+.rsvp-inline-card .rsvp-modal__date .rsvp-date-num {
+  font-size: 1.05rem !important;
 }
 #rsvp-trigger-section.anim-target,
 #rsvp-trigger-section .anim-target {
@@ -14677,4 +14695,165 @@ body:has(.viewer.is-active) {
 #rsvp-trigger-section .section__inner {
   display: flex;
   justify-content: center;
+}
+
+/* 참석여부 카드에 의도치 않은 그림자가 남아있다는 피드백 — id 선택자로
+   확실하게 최종 우선순위를 갖도록 다시 한 번 명시적으로 제거 */
+#rsvp-trigger-section .rsvp-inline-card {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  filter: none !important;
+  border: none !important;
+}
+
+/* ── 참석여부 폼 — 팝업 카드 대신 심플한 화이트 섹션으로 완전히 재구성 ── */
+#rsvp-trigger-section {
+  background: #FFFFFF !important;
+  padding: 56px 20px 64px !important;
+}
+.rsvp-inline-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: center;
+}
+.rsvp-simple__title {
+  margin-bottom: 10px !important;
+}
+.rsvp-simple__subtitle {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: #8a8478;
+  margin: 0 0 30px;
+}
+.rsvp-simple__group {
+  margin-bottom: 22px;
+  text-align: left;
+}
+.rsvp-simple__label {
+  font-size: 0.74rem;
+  color: #a8a294;
+  margin: 0 0 8px;
+  text-align: left;
+}
+.rsvp-toggle-group {
+  display: flex;
+  gap: 8px;
+}
+.rsvp-toggle-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.rsvp-toggle-group label {
+  flex: 1;
+  height: 46px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #F7F5F0;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: #a8a294;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.rsvp-toggle-group input[type="radio"]:checked + label {
+  background: #ECE8DD;
+  color: #6b6555;
+}
+.rsvp-simple__row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.rsvp-simple__field {
+  flex: 1;
+  text-align: left;
+}
+.rsvp-simple__field--count {
+  flex: 0 0 30%;
+}
+.rsvp-inline-card .rsvp-input {
+  width: 100% !important;
+  height: 46px !important;
+  box-sizing: border-box !important;
+  padding: 0 14px !important;
+  background: #F7F5F0 !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-size: 0.85rem !important;
+  color: #6b6555 !important;
+  text-align: left !important;
+  outline: none !important;
+}
+.rsvp-inline-card .rsvp-input:focus {
+  outline: 1px solid rgba(180, 172, 150, 0.5) !important;
+  outline-offset: 1px !important;
+}
+.rsvp-inline-card .rsvp-submit {
+  display: block !important;
+  width: min(58%, 210px) !important;
+  height: 46px !important;
+  line-height: 46px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  background: #6b6252 !important;
+  color: #fdfaf5 !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-family: 'Noto Serif KR', serif !important;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.06em !important;
+  cursor: pointer !important;
+}
+.rsvp-inline-card .rsvp-message {
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+.rsvp-inline-card .rsvp-message.is-success { color: #6a7a5a; }
+.rsvp-inline-card .rsvp-message.is-error { color: #a35c4f; }
+
+/* 성함/인원 입력창 포커스 시 두꺼운 테두리 문제 — 다른 낡은 규칙들을
+   확실히 이기도록 맨 끝에서 다시 한 번 강하게 지정 */
+#rsvp-trigger-section .rsvp-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+#rsvp-trigger-section .rsvp-input:focus {
+  border: none !important;
+  outline: 1px solid rgba(210, 206, 195, 0.15) !important;
+  outline-offset: 1px !important;
+  box-shadow: none !important;
+}
+#rsvp-trigger-section .rsvp-submit {
+  width: min(58%, 210px) !important;
+  margin: 0 auto !important;
+}
+
+/* 사진 파일을 건드리지 않고, 사진 위에 별도의 흰색 오버레이 레이어를
+   직접 얹어서 경계를 흐리게 함 — 전용 요소라 다른 CSS와 충돌 위험 없음 */
+.footer-wine2 .tray .tray__white-fade {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 400px !important;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.9) 15%,
+    rgba(255,255,255,0.6) 40%,
+    rgba(255,255,255,0.25) 70%,
+    rgba(255,255,255,0) 100%) !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
 }

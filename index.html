@@ -293,34 +293,48 @@
     <!-- ── 참석여부 안내 및 전달 — 버튼 없이 항상 화면에 보이도록 배치 ── -->
     <section class="section rsvp-trigger" id="rsvp-trigger-section">
       <div class="section__inner anim-target">
-        <div class="rsvp-modal__panel rsvp-inline-card">
-          <div class="rsvp-card">
-          <p class="rsvp-modal__date" id="rsvp-title"><span class="rsvp-date-num">2026. 10. 17</span> (토) 오후 <span class="rsvp-date-num">4</span>시 <span class="rsvp-date-num">20</span>분</p>
-
-          <p class="rsvp-modal__summary">
-            참석해 주시는 분들을<br />
-            소중히 모시고자 합니다.<br />
-            참석여부를 알려주시면 감사하겠습니다.
-          </p>
-
-          <span class="rsvp-rule" aria-hidden="true"></span>
+        <div class="rsvp-inline-card">
+          <h2 class="section__title rsvp-simple__title">참석여부</h2>
+          <p class="rsvp-simple__subtitle">참석해 주시는 분들을 소중히 모시고자 합니다.<br />참석여부를 알려주시면 감사하겠습니다.</p>
 
           <form class="rsvp-form" id="rsvp-form">
-            <input class="rsvp-input" id="rsvp-name" name="name" type="text" placeholder="성함" maxlength="20" autocomplete="name" required />
+            <div class="rsvp-simple__group">
+              <p class="rsvp-simple__label">구분</p>
+              <div class="rsvp-toggle-group" role="radiogroup" aria-label="구분">
+                <input id="rsvp-side-groom" name="side" type="radio" value="groom" checked />
+                <label for="rsvp-side-groom">신랑측</label>
 
-            <div class="rsvp-choice-group" role="radiogroup" aria-label="참석 여부">
-              <input id="rsvp-attend" name="attendance" type="radio" value="attend" checked />
-              <label for="rsvp-attend">참석</label>
+                <input id="rsvp-side-bride" name="side" type="radio" value="bride" />
+                <label for="rsvp-side-bride">신부측</label>
+              </div>
+            </div>
 
-              <input id="rsvp-absent" name="attendance" type="radio" value="absent" />
-              <label for="rsvp-absent">불참</label>
+            <div class="rsvp-simple__group">
+              <p class="rsvp-simple__label">참석 여부</p>
+              <div class="rsvp-toggle-group" role="radiogroup" aria-label="참석 여부">
+                <input id="rsvp-attend" name="attendance" type="radio" value="attend" checked />
+                <label for="rsvp-attend">참석</label>
+
+                <input id="rsvp-absent" name="attendance" type="radio" value="absent" />
+                <label for="rsvp-absent">불참</label>
+              </div>
+            </div>
+
+            <div class="rsvp-simple__row">
+              <div class="rsvp-simple__field">
+                <p class="rsvp-simple__label">성함</p>
+                <input class="rsvp-input" id="rsvp-name" name="name" type="text" placeholder="성함" maxlength="20" autocomplete="name" required />
+              </div>
+              <div class="rsvp-simple__field rsvp-simple__field--count">
+                <p class="rsvp-simple__label">인원</p>
+                <input class="rsvp-input" id="rsvp-count" name="count" type="number" min="1" max="9" value="1" inputmode="numeric" />
+              </div>
             </div>
 
             <button class="rsvp-submit" id="rsvp-submit" type="submit">전달하기</button>
 
             <p class="rsvp-message" id="rsvp-message" aria-live="polite"></p>
           </form>
-          </div>
         </div>
       </div>
     </section>
@@ -331,6 +345,7 @@
     <div class="footer-wine2" aria-label="마무리">
       <figure class="tray" aria-hidden="true">
         <img src="images/finale/tray.jpg" alt="" decoding="async" draggable="false" />
+        <div class="tray__white-fade" aria-hidden="true"></div>
       </figure>
 
       <div class="fbtns">
