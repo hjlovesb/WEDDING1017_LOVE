@@ -1,45 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@200;300;400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'Ortica Linear';
-  src: url('./fonts/OrticaLinear-Regular.woff2') format('woff2');
+  src: url('fonts/OrticaLinear-Regular.woff2') format('woff2');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Serif KR';
-  src: url('./fonts/noto-serif-kr-v31-korean_latin-200.woff2') format('woff2');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Noto Serif KR';
-  src: url('./fonts/noto-serif-kr-v31-korean_latin-300.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Noto Serif KR';
-  src: url('./fonts/noto-serif-kr-v31-korean_latin-regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Noto Serif KR';
-  src: url('./fonts/noto-serif-kr-v31-korean_latin-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Noto Serif KR';
-  src: url('./fonts/noto-serif-kr-v31-korean_latin-600.woff2') format('woff2');
-  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -116,12 +80,6 @@ button {
   background: none;
   font-family: inherit;
   color: inherit;
-}
-
-input,
-textarea,
-select {
-  font-family: inherit;
 }
 
 a {
@@ -6385,7 +6343,7 @@ body {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  background: #171713 url('./images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+  background: #171713 url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   opacity: 1 !important;
   visibility: visible !important;
   transform: none !important;
@@ -6551,7 +6509,7 @@ body:not(.intro-active) .hero {
   justify-content: center !important;
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.10), rgba(17, 15, 13, 0.18)),
-    url('./images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   overflow: hidden !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -6592,7 +6550,7 @@ body:not(.intro-active) .hero {
   position: absolute !important;
   inset: 0 !important;
   z-index: 2 !important;
-  background: url('./images/intro/envelope.png') center center / contain no-repeat !important;
+  background: url('images/intro/envelope.png') center center / contain no-repeat !important;
   clip-path: polygon(8% 0%, 92% 0%, 50% 39%) !important;
   transform-origin: 50% 4% !important;
   opacity: 0.98 !important;
@@ -7383,7 +7341,7 @@ body:not(.intro-active) .hero {
 #curtain.curtain {
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.08), rgba(17, 15, 13, 0.14)),
-    url('./images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   background-attachment: scroll !important;
   transform: none !important;
   animation: none !important;
@@ -7540,7 +7498,7 @@ body:not(.intro-active) .hero {
   opacity: 1 !important;
   background:
     linear-gradient(180deg, rgba(17, 15, 13, 0.06), rgba(17, 15, 13, 0.12)),
-    url('./images/intro/intro-bg.jpg') center center / cover no-repeat !important;
+    url('images/intro/intro-bg.jpg') center center / cover no-repeat !important;
   background-attachment: scroll !important;
   background-position: center center !important;
   transform: none !important;
@@ -8299,6 +8257,10 @@ html, body {
   border-bottom: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
 }
 
 /* ======================================================
@@ -10029,7 +9991,7 @@ html.viewer-open, html.viewer-open body { overflow: hidden !important; overscrol
 /* ─── 공통: 소제목 통일 (컬러 유지 · 이탤릭 세리프 · 크게) ── */
 .section__title,
 .section__title.script-font {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 500 !important;
   font-size: 1.72rem !important;
@@ -10335,7 +10297,7 @@ html.viewer-open, html.viewer-open body { overflow: hidden !important; overscrol
 .section .section__title,
 .section .section__title.script-font,
 h2.section__title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 500 !important;
   font-size: 1.56rem !important;
@@ -10444,7 +10406,7 @@ body .section .section__title.script-font,
 body h2.section__title,
 body #greeting-title,
 body #greeting .section__title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Noto Serif KR', serif !important;
   font-style: italic !important;
   font-weight: 600 !important;            /* 진하게 */
   font-size: 1.56rem !important;
@@ -12500,14 +12462,14 @@ body .section .section__title::after { content: none !important; display: none !
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: silverFlow 14s ease-in-out infinite;
+  animation: silverFlow 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
   pointer-events: none;
   z-index: 2;
 }
 
 @keyframes silverFlow {
-  0%, 100% { background-position: 12% 50%; }
-  50%      { background-position: 88% 50%; }
+  0%   { background-position: 0% 50%; }
+  100% { background-position: -240% 50%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -13784,7 +13746,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 2.5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite !important;
+  animation: silverFlow 0.15s linear infinite !important;
 }
 
 .card__yr i,
@@ -13866,7 +13828,7 @@ body { overflow-x: hidden; }
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  animation: silverFlow 2.5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite !important;
+  animation: silverFlow 0.15s linear infinite !important;
 }
 
 /* 흐름이 서로 살짝 어긋나 더 자연스럽게 */
@@ -14146,7 +14108,7 @@ body:not(.intro-active) .invitation {
 .rsvp-input,
 .rsvp-choice-group,
 .rsvp-submit {
-  width: 80% !important;
+  width: 94% !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -14170,7 +14132,7 @@ body:not(.intro-active) .invitation {
 /* ─── 2) OUR STORY — 요청에 따라 힌트 모션은 걷어내고 원래대로 둡니다 ─── */
 
 /* 2026 은빛 글자 — 조금 더 위로, 줄간격 최소화, WEDDING DAY 자간 살짝 여유·크기 확대 */
-.card__yr { bottom: 25% !important; gap: 0 !important; }
+.card__yr { bottom: 23.5% !important; gap: 0 !important; }
 .card__yr i, .card__yr b {
   font-size: clamp(1.65rem, 7.8vw, 2.35rem) !important;
   font-weight: 300 !important;
@@ -14269,110 +14231,224 @@ body:not(.intro-active) .invitation {
   font-size: clamp(calc(0.7rem + 0.0292rem), 3.4vw, calc(0.9rem + 0.0292rem)) !important;
 }
 
+/* ============================================================
+   SENIOR EDITION — 어르신용 전용 오버라이드 (이 파일 맨 끝에 위치,
+   위의 모든 !important 규칙들보다 우선 적용되도록 의도적으로 배치)
+   ============================================================ */
 
-/* =========================================================
-   GENERAL FINAL PATCH 2026-08-02
-   ========================================================= */
-/* 인트로 봉투 주변의 불필요한 분홍 원형/그라데이션 장식 완전 제거 */
-#curtain .curtain__content::before,
-#curtain .curtain__content::after,
-#curtain .curtain__frame::before,
-#curtain .curtain__frame::after,
-#curtain::before,
-#curtain::after {
-  content: none !important;
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-  background: none !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  filter: none !important;
+/* 기준 폰트 크기를 키워서, rem 단위를 쓰는 대부분의 글자가
+   비례해서 다 같이 커지게 합니다(하나하나 찾아 고치는 대신). */
+html {
+  font-size: 21px !important;
 }
 
-/* 계좌 정보는 모바일에서도 한 줄 유지 */
-.account-item,
-.account-item__info,
-.account-item__detail,
-.account-item__role,
-.account-item__name {
-  min-width: 0 !important;
-}
-.account-item__detail {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  white-space: nowrap !important;
+/* 한글 단어가 화면 폭에 맞춰 글자 하나씩 잘려서 다음 줄로
+   넘어가는 것(예: '나비'가 '나' + '비'로 쪼개짐)을 막습니다.
+   띄어쓰기가 있는 지점에서만 줄이 바뀌게 합니다. */
+body, p, span, div, a, button, h1, h2, h3 {
   word-break: keep-all !important;
   overflow-wrap: normal !important;
-  font-size: clamp(0.67rem, 3.15vw, 0.85rem) !important;
-  letter-spacing: -0.025em !important;
-}
-.account-item__name {
-  white-space: nowrap !important;
-  flex: 0 0 auto !important;
-}
-.account-item__copy {
-  flex: 0 0 auto !important;
-  margin-left: 8px !important;
-}
-@media (max-width: 360px) {
-  .account-item { padding-left: 12px !important; padding-right: 12px !important; }
-  .account-item__detail { font-size: 0.64rem !important; gap: 3px !important; }
-  .account-item__copy { padding-left: 10px !important; padding-right: 10px !important; margin-left: 5px !important; }
 }
 
-/* =========================================================
-   GENERAL PATCH 2026-08-02 — OUR STORY 2026 SILVER TEXT
-   Senior edition과 동일한 화면상 위치/크기만 일반용에 이식
-   ========================================================= */
-.card__yr {
-  bottom: 23.5% !important;
-  gap: 0 !important;
+/* 봉투 열기 버튼 — 손이 떨리거나 정확히 누르기 어려운 분들을 위해
+   실제 누를 수 있는 범위를 눈에 보이는 실링보다 훨씬 넓게 잡습니다. */
+#curtain #curtain-open.curtain__seal-hit,
+#curtain .curtain__seal-hit {
+  width: clamp(120px, 34vw, 190px) !important;
+  height: clamp(120px, 34vw, 190px) !important;
 }
-.card__yr i,
-.card__yr b {
-  font-size: clamp(34.65px, 7.8vw, 49.35px) !important;
-  font-weight: 300 !important;
-  transform: scaleX(0.68) !important;
+
+/* 시니어판 메인(Hero) 사진 — 핑크 카드 이미지 안의 글자가 잘리지 않고
+   전체가 다 보이도록 이미지 원래 비율에 맞춥니다(자르지 않음) */
+.hero__photo-wrap {
+  aspect-ratio: 941 / 1672 !important;
+  height: auto !important;
 }
-.card__yr i {
-  letter-spacing: -0.015em !important;
-  text-indent: -0.015em !important;
-  font-size: clamp(43.05px, 9.7vw, 59.85px) !important;
-  align-self: flex-end !important;
+.hero__photo-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+#curtain .curtain__hint-kr {
+  font-size: 1.0rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* 시니어판 전용 오프닝 배경 이미지로 교체 */
+#curtain,
+#curtain.curtain,
+#curtain.curtain.is-ready {
+  background:
+    linear-gradient(180deg, rgba(17, 15, 13, 0.10), rgba(17, 15, 13, 0.18)),
+    url('images/intro/intro-bg-senior.jpg?v=3') center center / cover no-repeat !important;
+}
+
+
+   것을 확실히 가운데 정렬합니다(letter-spacing이 중앙정렬을 미묘하게
+   틀어지게 하고 있어서 제거함) */
+.calendar-section .section__inner {
+  max-width: 480px !important;
+}
+.calendar,
+.calendar-section .calendar {
+  max-width: 480px !important;
+  width: 100% !important;
+}
+.dcal {
+  max-width: 480px !important;
+  width: 100% !important;
+}
+.dcal__dateline {
+  display: none !important;
+}
+.dcal__grid {
+  column-gap: 2px !important;
+  row-gap: 7px !important;
+  max-width: 280px !important;
+  width: 100% !important;
   margin-left: auto !important;
-  margin-right: 2% !important;
+  margin-right: auto !important;
+  justify-items: center !important;
 }
-.card__yr b {
-  margin-top: -4px !important;
+.dcal__day {
+  justify-content: center !important;
+  text-align: center !important;
+  height: 31px !important;
 }
-
-/* =========================================================
-   GENERAL PATCH 2026-08-03 — REQUESTED MICRO ADJUSTMENTS ONLY
-   ========================================================= */
-/* Wedding Day countdown: color only, matching senior edition */
-.dcal__dday,
+.dcal__day i {
+  font-size: 1.3rem !important;
+  letter-spacing: normal !important;
+  text-align: center !important;
+}
+.dcal__day.is-wedding i {
+  font-size: 1.45rem !important;
+}
+.dcal__day.is-wedding::after {
+  width: 34px !important;
+  height: 34px !important;
+  top: 2px !important;
+}
+/* 월 제목 — 숫자(10)는 조금 작게, "월" 글자는 조금 크게 */
+.dcal__month {
+  font-size: 2.0rem !important;
+}
+.dcal__month-unit {
+  font-size: 0.95rem !important;
+  margin-left: 2px;
+}
+/* "결혼식까지 N일 남았습니다" 문구는 더 작게 */
+.dcal__dday {
+  font-size: 0.72rem !important;
+  color: #9c8f78 !important;
+}
 .dcal__dday b {
   color: #9c8f78 !important;
 }
 
-/* RSVP popup: slightly larger panel, 3-line guide text, and larger date digits only */
-.rsvp-modal__panel {
-  width: min(88vw, 345px) !important;
-  max-width: none !important;
+/* 계좌(Celebration) — 은행명/계좌번호가 커진 시니어 폰트에서 한 줄을
+   넘어 지저분해 보이지 않도록 폰트를 살짝 줄입니다 */
+/* 계좌(Celebration) — 은행명/계좌번호가 커진 시니어 폰트에서 한 줄을
+   넘어 지저분해 보이지 않도록 폰트를 줄이고 줄바꿈을 막습니다.
+   (주의: 실제 렌더링되는 클래스는 .account-item__* 입니다 — .acc-row__*
+   라는 클래스는 DOM에 존재하지 않으므로 절대 그걸로 다시 시도하지 말 것) */
+.account-item {
+  flex-wrap: nowrap !important;
 }
-.rsvp-card {
-  padding-bottom: 4% !important;
+.account-item__role,
+.account-item__detail,
+.account-item__name {
+  font-size: 0.68rem !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.02em !important;
 }
+
+/* 오시는 길 안내 문구 — 소제목 아래 내용들이 항목마다 크기가 제각각이던
+   것을 하나로 통일하고, 어르신이 보기 좋게 크게 키웠습니다. 웬만하면
+   한 줄을 넘기지 않도록 하되, 그래도 넘치면 "(3분 소요)" 같은 괄호
+   부가설명만 살짝 작게 줄여서 한 줄에 들어가게 합니다. */
+.location-transport__line,
+.location-transport__line.is-label,
+.location-transport__line.is-sub,
+.location-transport__line.is-note {
+  font-size: 0.85rem !important;
+  white-space: normal !important;
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+}
+.location-transport__detail {
+  font-size: 0.68rem !important;
+  white-space: nowrap !important;
+  color: #3f3a33 !important;
+}
+.location-transport__line.is-note .location-transport__detail {
+  font-size: inherit !important;
+  font-weight: 500 !important;
+}
+
+/* 계좌 복사 버튼 — 내용이 길어도 버튼이 눌리거나 줄 위치가 흔들리지
+   않도록 항상 같은 자리(오른쪽)에 고정. 버튼은 고정 폭, 정보 영역은
+   남는 공간을 전부 차지하게 해서 버튼이 항상 정확히 같은 x좌표에 오게
+   합니다(이전엔 이유 없이 버튼마다 폭이 미세하게 달라질 수 있었음) */
+.account-item {
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.account-item__info {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+.account-item__copy {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding: 5px 0 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Our Beginning — 부모님 이름만 크게(의 아들/딸은 그대로), 절대 줄바꿈 안 되게 */
+.obeg__parents {
+  white-space: nowrap !important;
+  font-size: 0.84rem !important;
+}
+.obeg__parents-names {
+  font-size: 1.16rem !important;
+}
+
+/* 참석여부 전달하기 버튼 (팝업은 이제 이 버튼을 눌러야만 뜹니다) */
+.section.rsvp-trigger {
+  padding: 36px 0 48px !important;
+  text-align: center !important;
+  background: #F7F2E6 !important;
+}
+.rsvp-trigger__btn {
+  display: block;
+  width: min(70vw, 240px);
+  margin: 0 auto;
+  padding: 12px 0;
+  border: 1px solid rgba(74, 74, 68, 0.22);
+  border-radius: 999px;
+  background: #3f3930;
+  color: #fdfaf5;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(63, 50, 44, 0.16);
+}
+.rsvp-trigger__btn:active {
+  transform: translateY(1px);
+}
+
+/* 참석여부 팝업 — 안내문이 4줄로 넘치던 것을 3줄로, 예식일자의 한글
+   부분만 살짝 줄여서 가로로 빽빽해 보이지 않게 (숫자 크기는 유지) */
 .rsvp-modal__summary {
   font-size: 0.72rem !important;
   line-height: 1.6 !important;
-  margin-bottom: 14px !important;
-  white-space: normal !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
 }
 .rsvp-modal__date {
   font-size: 0.6rem !important;
@@ -14381,152 +14457,94 @@ body:not(.intro-active) .invitation {
   font-size: 0.95rem !important;
 }
 
-
-/* =========================================================
-   GENERAL PATCH 2026-08-03 — USER REQUESTED 4 ITEMS ONLY
-   ========================================================= */
-/* 1) 일반용 캘린더: 1~31일 숫자만 조금 확대 */
-.dcal__day i {
-  font-size: 1.08rem !important;
-}
-.dcal__day.is-wedding i {
-  font-size: 1.18rem !important;
+/* 초대글 문단 사이 여백 — 시각적으로 두 줄 정도 띄워서 분리되게 */
+.gline--gap {
+  display: block;
+  height: 2.6rem;
 }
 
-/* 2) OUR STORY: 기존 은빛 효과 유지, 문구 축소 및 왼쪽 정렬 */
-.card__yr {
-  left: 8% !important;
-  right: auto !important;
-  width: 84% !important;
-  align-items: flex-start !important;
+/* 마음 전하실 곳 — 안내문구를 계좌 박스(아코디언, max-width:400px으로
+   가운데 정렬됨)와 똑같은 폭·정렬로 맞춰서 왼쪽 시작선을 일치시킵니다 */
+.account__subtitle {
   text-align: left !important;
-}
-.card__yr i,
-.card__yr b {
-  font-size: clamp(27px, 6.1vw, 38px) !important;
-  transform: scaleX(0.76) !important;
-  transform-origin: left center !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  align-self: flex-start !important;
-}
-.card__yr i {
-  font-size: clamp(32px, 7.3vw, 45px) !important;
-  letter-spacing: -0.01em !important;
+  max-width: 400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
   text-indent: 0 !important;
 }
 
-/* 3) LOCATION 문구는 config.js에서 '(3분 소요)'로 변경 */
-
-/* 4) CELEBRATION: 계좌 자간 확대, 복사 버튼만 미세 축소 */
-.account-item__detail {
-  letter-spacing: 0.015em !important;
-}
-.account-item__copy {
-  padding: 7px 14px !important;
-  font-size: 0.74rem !important;
-}
-@media (max-width: 360px) {
-  .account-item__copy {
-    padding: 6px 9px !important;
-    font-size: 0.7rem !important;
-  }
-}
-
-/* =========================================================
-   GENERAL PATCH 2026-08-03 — POPUP + OUR STORY ONLY
-   ========================================================= */
-/* 1) 일반용 참석 팝업: 배경 크기는 다시 작게, 내부 안내/예식일 글자는 확대 */
-.rsvp-modal__panel {
-  width: min(304px, calc(100vw - 36px)) !important;
-  max-width: 304px !important;
-}
-.rsvp-card {
-  padding: 4% 12% 3% !important;
-  overflow: hidden !important;
-}
-.rsvp-modal__summary {
-  font-size: clamp(0.79rem, 3.45vw, 0.88rem) !important;
-  line-height: 1.55 !important;
-  margin: 12px 0 12px !important;
-  white-space: normal !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
-.rsvp-modal__date {
-  font-size: clamp(0.72rem, 3.05vw, 0.79rem) !important;
-  line-height: 1.35 !important;
-  white-space: nowrap !important;
-}
-.rsvp-modal__date .rsvp-date-num {
-  font-size: clamp(0.9rem, 3.8vw, 1.02rem) !important;
-}
-
-/* 2) 2026 은빛 효과 문구: 효과/크기는 유지하고 위치만 조금 오른쪽으로 */
+/* Our Story 2026 카드 실버텍스트 — 일반판과 동일한 배치/크기가 되도록
+   맞춤(시니어판은 루트폰트가 21px로 더 커서, 16px 기준인 일반판과
+   같은 실제 크기가 나오도록 비율(16/21)을 적용해 rem값을 조정함) */
 .card__yr {
-  left: 12% !important;
-  width: 82% !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  bottom: 23% !important;
+  gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.card__yr i,
+.card__yr b {
+  display: block !important;
+  width: 100% !important;
+  font-size: 1.79rem !important;
+  font-weight: 300 !important;
+  transform: scaleX(0.68) !important;
+  transform-origin: center center !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  letter-spacing: normal !important;
+  text-indent: 0 !important;
+}
+.card__yr i {
+  font-size: 2.1rem !important;
+  transform: scaleX(0.68) translateX(6px) !important;
+}
+.card__yr b {
+  margin-top: -4px !important;
+  font-size: 2.36rem !important;
 }
 
-/* 3) OUR STORY 일반용: 시니어용과 같은 차분한 순차 등장 효과 */
-.ourstory .section__title[data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(3px);
-  transition: opacity 1.45s cubic-bezier(0.18, 0.72, 0.2, 1),
-              transform 1.45s cubic-bezier(0.18, 0.72, 0.2, 1),
-              filter 1.25s cubic-bezier(0.18, 0.72, 0.2, 1);
-}
-.ourstory .section__title[data-reveal].is-visible,
-.ourstory .section__title[data-reveal].is-in {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-#story-cards[data-reveal] {
-  opacity: 0;
-  transform: translateY(28px) scale(0.985);
-  filter: blur(4px);
-  transition: opacity 1.65s 0.12s cubic-bezier(0.18, 0.72, 0.2, 1),
-              transform 1.65s 0.12s cubic-bezier(0.18, 0.72, 0.2, 1),
-              filter 1.4s 0.12s cubic-bezier(0.18, 0.72, 0.2, 1);
-}
-#story-cards[data-reveal].is-visible,
-#story-cards[data-reveal].is-in {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .ourstory .section__title[data-reveal],
-  #story-cards[data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    transition: none !important;
-  }
+/* 인트로 봉투 아래 나타나던 은은한 원형 광채 장식들을 요청에 따라 제거 */
+#curtain .curtain__seal-hit::before,
+#curtain .curtain__seal-ring::after {
+  display: none !important;
 }
 
+/* 인트로 봉투 밑에 계속 보인다는 붉은/분홍 원형 장식 — 관련될 수 있는
+   모든 가상요소를 한 번에 확실히 제거(어떤 것이 진짜 원인이든 대응) */
+#curtain .curtain__content::before,
+#curtain .curtain__content::after,
+#curtain .curtain__frame::after,
+.curtain__content::before,
+.curtain__content::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
 
-/* =========================================================
-   GENERAL PATCH 2026-08-03 — RSVP POPUP MICRO SIZE + 3 LINES ONLY
-   ========================================================= */
+/* 참석여부 팝업 — 좀 더 크게, 안내문구 마지막 줄이 팝업 밖으로
+   튀어나가지 않도록 아래쪽 여백 확보 */
 .rsvp-modal__panel {
-  width: min(320px, calc(100vw - 28px)) !important;
-  max-width: 320px !important;
+  width: min(88vw, 345px) !important;
+  max-width: none !important;
 }
 .rsvp-card {
-  padding-left: 9% !important;
-  padding-right: 9% !important;
+  padding-bottom: 4% !important;
 }
 .rsvp-modal__summary {
-  font-size: clamp(0.76rem, 3.25vw, 0.87rem) !important;
-  line-height: 1.48 !important;
+  margin-bottom: 14px !important;
 }
-.rsvp-modal__summary span {
-  display: block !important;
-  white-space: nowrap !important;
-}
+
 /* 우리의 이야기 — 엽서 옆으로 넘기는 화살표/점 네비게이션 숨김
    (어르신들이 이걸로만 넘기고 뒤집기를 발견 못 하셔서 제거) */
 .cards__nav {
@@ -14584,16 +14602,32 @@ body:not(.intro-active) .invitation {
 }
 @keyframes cardGlowRing {
   0%, 100% {
-    box-shadow: 0 0 0 0px rgba(255, 255, 255, 0), 0 0 0px 0 rgba(220, 225, 230, 0);
+    box-shadow: 0 0 0 0px rgba(224, 200, 160, 0), 0 0 0px 0 rgba(224, 200, 160, 0);
   }
   50% {
-    box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.6), 0 0 38px 2px rgba(255, 255, 252, 0.95);
+    box-shadow: 0 0 0 1px rgba(240, 232, 216, 0.85), 0 0 30px 3px rgba(224, 220, 208, 0.85);
   }
 }
 /* 카드 표면 위로 부드러운 광택이 한 번씩 스치듯 지나가며 더 고급스럽게.
    2026(메인) 카드는 조금 더 느긋하고 넓게 스쳐서 특별한 느낌을 줍니다. */
-/* 카드 내부 광택 스침 효과 — 인위적으로 보인다는 피드백으로 제거함
-   (테두리 발광 효과만 유지) */
+.card.is-current[data-flip="0"] .card__face--front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+  background: linear-gradient(
+    118deg,
+    transparent 22%,
+    rgba(255, 253, 248, 0.03) 38%,
+    rgba(255, 253, 248, 0.13) 48%,
+    rgba(255, 253, 248, 0.03) 58%,
+    transparent 74%
+  );
+  background-size: 280% 280%;
+  background-position: 120% 0%;
+  animation: cardSheen 7s ease-in-out infinite;
+}
 @keyframes cardSheen {
   0%   { background-position: 150% 0%; }
   32%  { background-position: -60% 0%; }
@@ -14605,18 +14639,18 @@ body:not(.intro-active) .invitation {
   animation: cardsHintFloat 3.2s ease-in-out infinite;
   text-shadow: 0 0 10px rgba(210, 200, 180, 0.5);
   letter-spacing: 0.04em;
-  font-size: 0.92rem !important;
+  font-size: clamp(0.8rem, 3.6vw, 0.92rem) !important;
 }
 @keyframes cardsHintFloat {
   0%, 100% {
-    opacity: 0.65;
+    opacity: 0.6;
     transform: translateY(0px);
-    text-shadow: 0 0 6px rgba(210, 200, 180, 0.35);
+    text-shadow: 0 0 6px rgba(210, 200, 180, 0.3);
   }
   50% {
     opacity: 1;
     transform: translateY(-3px);
-    text-shadow: 0 0 18px rgba(230, 218, 190, 0.9), 0 0 6px rgba(255, 250, 235, 0.6);
+    text-shadow: 0 0 12px rgba(224, 214, 192, 0.65);
   }
 }
 
@@ -14638,68 +14672,11 @@ body:not(.intro-active) .invitation {
    어느 쪽도 다르지 않게 통일합니다(딱딱한 선이 아니라 부드러운 느낌) */
 .card__inner {
   border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+  box-shadow: inset 0 0 0 1px rgba(120, 110, 95, 0.06), 0 1px 6px rgba(80, 70, 58, 0.08) !important;
 }
 
-/* 참석여부 팝업 — 예식일 숫자만 더 크게(한글 부분은 유지), 안내문구는
-   아주 살짝만 더 크게 */
-.rsvp-modal__date .rsvp-date-num {
-  font-size: clamp(1.35rem, 5.6vw, 1.55rem) !important;
-}
-.rsvp-modal__summary {
-  font-size: clamp(0.8rem, 3.4vw, 0.91rem) !important;
-  line-height: 1.7 !important;
-}
-
-/* 2026 카드 실버텍스트(WEDDING DAY / 예식일자) — 가운데 정렬을 확실히
-   보장하기 위해 폭을 100%로 채우고 text-align만으로 정렬, 크기도 키움 */
-.card__yr {
-  position: absolute !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  bottom: 23% !important;
-  gap: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-.card__yr i,
-.card__yr b {
-  display: block !important;
-  width: 100% !important;
-  font-size: 2.35rem !important;
-  font-weight: 300 !important;
-  transform: scaleX(0.68) !important;
-  transform-origin: center center !important;
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  letter-spacing: normal !important;
-  text-indent: 0 !important;
-}
-.card__yr i {
-  font-size: 2.75rem !important;
-  transform: scaleX(0.68) translateX(6px) !important;
-}
-.card__yr b {
-  margin-top: -4px !important;
-  font-size: 3.1rem !important;
-}
-
-/* 갤러리 확대사진 뷰어 배경 — 반투명해서 뒤에 다른 요소(영문 글자,
-   자동재생 사진)가 비치던 문제. 완전 불투명하게 조정 */
-.viewer__backdrop {
-  background: #000 !important;
-  opacity: 1 !important;
-}
-
-/* 갤러리 확대뷰어 — 모바일 브라우저 하단 바(새로고침/공유하기 등)가
-   비쳐 보이던 문제. 실제 보이는 화면 높이(dvh)까지 확실히 덮고,
-   그 아래 배경도 검은색으로 통일 */
+/* 갤러리 확대사진 뷰어 배경 — 완전 불투명하게, 실제 화면 높이까지
+   확실히 덮어서 뒤에 아무것도 안 보이게 함(일반판과 동일) */
 .viewer {
   height: 100dvh !important;
   height: 100vh !important;
@@ -14711,21 +14688,211 @@ html.viewer-open body {
 body:has(.viewer.is-active) {
   background: #000 !important;
 }
-
-/* 옆 카드가 살짝 삐져나와 테두리처럼 보이는 문제 — 스테이지 바깥으로
-   /* 옆 카드가 살짝 삐져나와 보이는 문제를 overflow:hidden으로 해결하려
-   했으나 반짝임 효과까지 같이 사라져서 되돌림(반짝임 효과가 우선) */
-
-/* 각주 안 괄호 — 색을 진하게, 들여쓰기된 줄에서는 윗줄과 같은 크기로 */
-.location-transport__detail {
-  color: #3f3a33 !important;
+.viewer__backdrop {
+  background: #000 !important;
+  opacity: 1 !important;
 }
-.location-transport__line.is-note .location-transport__detail {
-  font-size: inherit !important;
-  font-weight: 500 !important;
+
+/* 참석여부 팝업을 버튼 뒤에 숨기지 않고 본문에 항상 보이도록 이 자리에
+   그대로 옮겨왔습니다. 모달이 아니므로 화면 높이 제한/스크롤은 풀고,
+   화면에 더 잘 보이도록 폭도 살짝 넉넉하게 둡니다 */
+.rsvp-inline-card.rsvp-modal__panel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: relative !important;
+  width: min(94%, 360px) !important;
+  max-width: 360px !important;
+  aspect-ratio: 831 / 1176 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 0 auto !important;
+  background: url('images/popup/rsvp-frame.png') center / 100% 100% no-repeat !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 15% 12% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
-.location-transport__line.is-note {
-  margin-top: 1px !important;
-  margin-bottom: 1px !important;
+.rsvp-inline-card .rsvp-modal__summary {
+  margin-top: -6px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.5 !important;
+  font-size: 0.66rem !important;
+  white-space: nowrap !important;
+}
+.rsvp-inline-card .rsvp-modal__date .rsvp-date-num {
+  font-size: 1.05rem !important;
+}
+#rsvp-trigger-section.anim-target,
+#rsvp-trigger-section .anim-target {
+  opacity: 1 !important;
+  transform: none !important;
+}
+#rsvp-trigger-section .section__inner {
+  display: flex;
+  justify-content: center;
+}
+
+/* 참석여부 카드에 의도치 않은 그림자가 남아있다는 피드백 — id 선택자로
+   확실하게 최종 우선순위를 갖도록 다시 한 번 명시적으로 제거 */
+#rsvp-trigger-section .rsvp-inline-card {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  filter: none !important;
+  border: none !important;
+}
+
+/* ── 참석여부 폼 — 팝업 카드 대신 심플한 화이트 섹션으로 완전히 재구성 ── */
+#rsvp-trigger-section {
+  background: #FFFFFF !important;
+  padding: 56px 20px 64px !important;
+}
+.rsvp-inline-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: center;
+}
+.rsvp-simple__title {
+  margin-bottom: 10px !important;
+}
+.rsvp-simple__subtitle {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: #8a8478;
+  margin: 0 0 30px;
+}
+.rsvp-simple__group {
+  margin-bottom: 22px;
+  text-align: left;
+}
+.rsvp-simple__label {
+  font-size: 0.74rem;
+  color: #a8a294;
+  margin: 0 0 8px;
+  text-align: left;
+}
+.rsvp-toggle-group {
+  display: flex;
+  gap: 8px;
+}
+.rsvp-toggle-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.rsvp-toggle-group label {
+  flex: 1;
+  height: 46px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #F7F5F0;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: #a8a294;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.rsvp-toggle-group input[type="radio"]:checked + label {
+  background: #ECE8DD;
+  color: #6b6555;
+}
+.rsvp-simple__row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.rsvp-simple__field {
+  flex: 1;
+  text-align: left;
+}
+.rsvp-simple__field--count {
+  flex: 0 0 30%;
+}
+.rsvp-inline-card .rsvp-input {
+  width: 100% !important;
+  height: 46px !important;
+  box-sizing: border-box !important;
+  padding: 0 14px !important;
+  background: #F7F5F0 !important;
+  border: none !important;
+  border-radius: 3px !important;
   font-size: 0.85rem !important;
+  color: #6b6555 !important;
+  text-align: left !important;
+  outline: none !important;
+}
+.rsvp-inline-card .rsvp-input:focus {
+  outline: 1px solid rgba(180, 172, 150, 0.5) !important;
+  outline-offset: 1px !important;
+}
+.rsvp-inline-card .rsvp-submit {
+  display: block !important;
+  width: min(58%, 210px) !important;
+  height: 46px !important;
+  line-height: 46px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  background: #6b6252 !important;
+  color: #fdfaf5 !important;
+  border: none !important;
+  border-radius: 3px !important;
+  font-family: 'Noto Serif KR', serif !important;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.06em !important;
+  cursor: pointer !important;
+}
+.rsvp-inline-card .rsvp-message {
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+.rsvp-inline-card .rsvp-message.is-success { color: #6a7a5a; }
+.rsvp-inline-card .rsvp-message.is-error { color: #a35c4f; }
+
+/* 성함/인원 입력창 포커스 시 두꺼운 테두리 문제 — 다른 낡은 규칙들을
+   확실히 이기도록 맨 끝에서 다시 한 번 강하게 지정 */
+#rsvp-trigger-section .rsvp-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+#rsvp-trigger-section .rsvp-input:focus {
+  border: none !important;
+  outline: 1px solid rgba(210, 206, 195, 0.15) !important;
+  outline-offset: 1px !important;
+  box-shadow: none !important;
+}
+#rsvp-trigger-section .rsvp-submit {
+  width: min(58%, 210px) !important;
+  margin: 0 auto !important;
+}
+
+/* 사진 파일을 건드리지 않고, 사진 위에 별도의 흰색 오버레이 레이어를
+   직접 얹어서 경계를 흐리게 함 — 전용 요소라 다른 CSS와 충돌 위험 없음 */
+.footer-wine2 .tray .tray__white-fade {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 400px !important;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.9) 15%,
+    rgba(255,255,255,0.6) 40%,
+    rgba(255,255,255,0.25) 70%,
+    rgba(255,255,255,0) 100%) !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
 }

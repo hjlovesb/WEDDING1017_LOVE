@@ -40,7 +40,7 @@
     return paths[0];
   }
 
-  const HERO_IMAGE_CANDIDATES = ['images/hero/general-hero-20260802.jpg'];
+  const HERO_IMAGE_CANDIDATES = ['images/intro/wedding-cover.jpg'];
   let heroImagePromise = null;
 
   function primeHeroImage() {
@@ -249,7 +249,10 @@ function initCurtain() {
     });
 
     hideTimer = setTimeout(hideIntroCompletely, 1580);
-    popupTimer = setTimeout(showAttendPopup, 260);
+    // 시니어판: 참석여부 팝업은 이제 자동으로 뜨지 않습니다("마음 전하실 곳"
+    // 아래 버튼으로만 수동 실행). 팝업이 닫힐 때 시작되던 본문 모션은
+    // 대신 여기서 곧바로 시작합니다.
+    popupTimer = setTimeout(markReady, 260);
   }
 
   curtain.classList.add('is-ready');
@@ -294,6 +297,15 @@ function initCurtain() {
       if (event.key === 'Enter' || event.key === ' ') scheduleCloseFromPress(event);
     });
   }
+
+  // 시니어판: 작은 실링 버튼뿐 아니라, 봉투 전체나 "청첩장 열기" 글자
+  // 영역 어디를 눌러도 열리게 합니다 — 어르신들은 정확한 버튼 위치를
+  // 못 찾고 이곳저곳 누르시는 경우가 많습니다.
+  curtain.addEventListener('click', (event) => {
+    if (introClosed) return;
+    if (openBtn && (event.target === openBtn || openBtn.contains(event.target))) return;
+    closeIntro();
+  });
 
   autoTimer = setTimeout(() => closeIntro(), AUTO_OPEN_DELAY);
 }
@@ -433,12 +445,21 @@ function initCurtain() {
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     // 초대글을 한 줄씩 나누어, 한 줄 한 줄 차례로 떠오르게 합니다.
-    const inviteLines = inviteRaw.split('\n').map((s) => s.trim()).filter(Boolean);
+    // 빈 줄(문단 사이 여백)은 filter로 없애지 않고, 별도의 여백용
+    // span으로 렌더링합니다 — 예전엔 filter(Boolean)이 빈 줄을 통째로
+    // 지워버려서 "한 줄 여백을 달라"고 해도 전혀 반영되지 않았습니다.
+    const inviteLines = inviteRaw.split('\n').map((s) => s.trim());
     if (text) {
       if (inviteLines.length > 1) {
+        let visibleIndex = 0;
         text.innerHTML = inviteLines
-          .map((ln, i) => {
-            const order = (3.4 + i * 0.95).toFixed(2);
+          .map((ln) => {
+            if (!ln) {
+              // 빈 줄 하나를 문단 두 줄 정도의 여백으로 표시합니다.
+              return `<span class="gline gline--gap" aria-hidden="true"></span>`;
+            }
+            const order = (3.4 + visibleIndex * 0.95).toFixed(2);
+            visibleIndex++;
             return `<span class="gline" data-reveal data-reveal-order="${order}">${escapeHtml(ln)}</span>`;
           })
           .join('');
@@ -468,7 +489,7 @@ function initCurtain() {
 
       parents.innerHTML = `
         <div class="obeg" data-reveal data-reveal-order="1">
-          <p class="obeg__parents">${makeName(g.father, g.fatherDeceased)} &middot; ${makeName(g.mother, g.motherDeceased)} <em>의 아들</em></p>
+          <p class="obeg__parents"><span class="obeg__parents-names">${makeName(g.father, g.fatherDeceased)} &middot; ${makeName(g.mother, g.motherDeceased)}</span> <em>의 아들</em></p>
           <p class="obeg__name">${g.fullName || g.name}</p>
           <p class="obeg__en">${g.nameEn || ''}</p>
         </div>
@@ -483,7 +504,7 @@ function initCurtain() {
           </svg>
         </span>
         <div class="obeg" data-reveal data-reveal-order="2">
-          <p class="obeg__parents">${makeName(b.father, b.fatherDeceased)} &middot; ${makeName(b.mother, b.motherDeceased)} <em>의 딸</em></p>
+          <p class="obeg__parents"><span class="obeg__parents-names">${makeName(b.father, b.fatherDeceased)} &middot; ${makeName(b.mother, b.motherDeceased)}</span> <em>의 딸</em></p>
           <p class="obeg__name">${b.fullName || b.name}</p>
           <p class="obeg__en">${b.nameEn || ''}</p>
         </div>
@@ -507,6 +528,7 @@ async function initCalendar() {
 
   const lastDay = new Date(y, m, 0).getDate();
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MONTHS_KR = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
   const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const dowEn = DAYS[new Date(y, m - 1, d).getDay()];
 
@@ -527,7 +549,7 @@ async function initCalendar() {
       <div class="dcal__photo" id="dcal-photo">
         <img id="dcal-photo-img" src="" alt="웨딩 사진" loading="lazy" decoding="async" draggable="false" />
       </div>
-      <p class="dcal__month script-font" aria-hidden="true">${MONTHS[m - 1]}</p>
+      <p class="dcal__month script-font" aria-hidden="true">${m}<span class="dcal__month-unit">월</span></p>
       <div class="dcal__grid">${cells}</div>
       <p class="dcal__dateline">${dowEn}, ${MONTHS[m - 1]} ${d}, ${y}</p>
       <p class="dcal__dday">결혼식까지 <b id="dcal-days">0</b>일 남았습니다</p>
@@ -539,6 +561,7 @@ async function initCalendar() {
   const photoImg = document.getElementById('dcal-photo-img');
   if (photoImg) {
     const src = await resolveFirstImage([
+      'images/calendar/1-senior.jpg',
       'images/calendar/1.jpg'
     ]);
     photoImg.src = src;
@@ -656,7 +679,7 @@ async function initCalendar() {
     .map(
       (src, i) => `
         <div class="gallery__item" data-index="${i}">
-          <img src="${src}" alt="갤러리 사진 ${i + 1}" loading="lazy" decoding="async" />
+          <img src="${src}" alt="갤러리 사진 ${i + 1}" loading="lazy" />
         </div>
       `
     )
@@ -1061,6 +1084,7 @@ function initViewer() {
   }
 
   function normalize() {
+    clearTimeout(go._fallbackTimer);
     const n = galleryImages.length;
     if (virtualIndex === 0) {
       virtualIndex = n;
@@ -1080,6 +1104,14 @@ function initViewer() {
     virtualIndex += dir;
     realIndex = (realIndex + dir + galleryImages.length) % galleryImages.length;
     snap(true);
+    // 안전장치: 어떤 이유로든(빠르게 연속 넘기기, 일부 브라우저 환경 등)
+    // transitionend가 발생하지 않으면 마지막 사진 이후로 넘어가지 않고
+    // 멈춰버리는 문제가 있었습니다. 애니메이션 시간보다 살짝 더 기다린
+    // 뒤, 아직 정리가 안 되어 있으면 강제로 normalize()를 실행합니다.
+    clearTimeout(go._fallbackTimer);
+    go._fallbackTimer = setTimeout(() => {
+      if (animating) normalize();
+    }, 720);
   }
 
   function open(startIndex = 0) {
@@ -1499,9 +1531,9 @@ async function initStoryPost() {
             content: {
               title: shareData.title,
               description: shareData.text,
-              imageUrl: new URL('images/og/general-link-exact-senior-layout.jpg?v=20260803v8', window.location.href).href,
-              imageWidth: 705,
-              imageHeight: 862,
+              imageUrl: new URL('images/intro/kakao-link-vertical.jpg?v=20260802v1', window.location.href).href,
+              imageWidth: 941,
+              imageHeight: 1167,
               link: { mobileWebUrl: shareData.url, webUrl: shareData.url }
             },
             buttons: [{
@@ -1676,7 +1708,9 @@ async function initStoryPost() {
         function refreshMapSize() {
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(function () {
-            naver.maps.Event.trigger(map, 'resize');
+            try {
+              naver.maps.Event.trigger(map, 'resize');
+            } catch (e) {}
           }, 120);
         }
 
@@ -1786,10 +1820,11 @@ async function initStoryPost() {
           let cls = 'location-transport__line';
           if (/^\[/.test(ln)) cls += ' is-label';
           else if (/^＊/.test(ln)) cls += ' is-note';
-          else if (/^[　\s]/.test(ln)) cls += ' is-note';
+          else if (/^[　\s]/.test(ln)) cls += ' is-note'; // 각주가 줄바꿈되어 이어지는 줄(들여쓰기)도 같은 스타일
           else if (/^제\s?\d/.test(ln)) cls += ' is-sub';
-          ln = ln.replace(/(\([^)]*\))/g, '<span class="location-transport__detail">$1</span>');
-          return `<p class="${cls}">${ln}</p>`;
+          // 괄호로 된 부가설명(예: "(3분 소요)")만 살짝 작게 감쌉니다.
+          const withSmallParens = ln.replace(/(\([^)]*\))/g, '<span class="location-transport__detail">$1</span>');
+          return `<p class="${cls}">${withSmallParens}</p>`;
         })
         .join('');
       return `
@@ -2021,10 +2056,7 @@ async function initStoryPost() {
       transform-origin: center;
       opacity: var(--opacity);
       animation: luxStarTwinkle var(--twinkle) ease-in-out var(--delay) infinite;
-      filter:
-        drop-shadow(0 0 2.5px rgba(255,255,255,0.75))
-        drop-shadow(0 0 6px rgba(248,230,200,0.4))
-        drop-shadow(0 0 11px rgba(255,247,236,0.2));
+      filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(1);
     }
 
     .lux-star svg {
@@ -2052,125 +2084,18 @@ async function initStoryPost() {
       }
     }
 
-    /* 핵심: 멈추지 않고 한 사이클 안에서 여러 번 반짝이게 */
+    /* 반짝임 — 어둡다가 확 밝아지는 스파클 패턴. 필터는 딱 하나(밝기)만
+       같이 움직여서 무겁지 않으면서도 확실히 반짝이는 느낌을 줍니다 */
     @keyframes luxStarTwinkle {
-      0% {
-        opacity: calc(var(--opacity) * 0.18);
-        transform: scale(0.45);
-        filter:
-          brightness(0.92)
-          drop-shadow(0 0 1px rgba(255,255,255,0.18))
-          drop-shadow(0 0 2px rgba(248,230,200,0.10));
-      }
-
-      8% {
-        opacity: calc(var(--opacity) * 0.42);
-        transform: scale(0.72);
-        filter:
-          brightness(1.08)
-          drop-shadow(0 0 2px rgba(255,255,255,0.32))
-          drop-shadow(0 0 4px rgba(248,230,200,0.16));
-      }
-
-      16% {
-        opacity: calc(var(--opacity) * 0.85);
-        transform: scale(1.02);
-        filter:
-          brightness(1.52)
-          drop-shadow(0 0 4px rgba(255,255,255,0.56))
-          drop-shadow(0 0 7px rgba(248,230,200,0.24));
-      }
-
-      22% {
-        opacity: calc(var(--opacity) * 0.40);
-        transform: scale(0.66);
-        filter:
-          brightness(1.02)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 3px rgba(248,230,200,0.12));
-      }
-
-      30% {
-        opacity: calc(var(--opacity) * 0.72);
-        transform: scale(0.92);
-        filter:
-          brightness(1.34)
-          drop-shadow(0 0 3px rgba(255,255,255,0.42))
-          drop-shadow(0 0 6px rgba(248,230,200,0.20));
-      }
-
-      38% {
-  opacity: calc(var(--opacity) * 0.88);
-  transform: scale(1.04);
-  filter:
-    brightness(1.62)
-    drop-shadow(0 0 3px rgba(255,255,255,0.56))
-    drop-shadow(0 0 6px rgba(248,230,200,0.22))
-    drop-shadow(0 0 9px rgba(255,247,236,0.08));
-}
-
-      46% {
-        opacity: calc(var(--opacity) * 0.48);
-        transform: scale(0.68);
-        filter:
-          brightness(1.00)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 4px rgba(248,230,200,0.12));
-      }
-
-      56% {
-        opacity: calc(var(--opacity) * 0.76);
-        transform: scale(0.94);
-        filter:
-          brightness(1.42)
-          drop-shadow(0 0 4px rgba(255,255,255,0.50))
-          drop-shadow(0 0 7px rgba(248,230,200,0.22));
-      }
-
-      64% {
-        opacity: calc(var(--opacity) * 0.34);
-        transform: scale(0.60);
-        filter:
-          brightness(0.98)
-          drop-shadow(0 0 2px rgba(255,255,255,0.18))
-          drop-shadow(0 0 3px rgba(248,230,200,0.10));
-      }
-
-      74% {
-        opacity: calc(var(--opacity) * 0.68);
-        transform: scale(0.88);
-        filter:
-          brightness(1.30)
-          drop-shadow(0 0 3px rgba(255,255,255,0.44))
-          drop-shadow(0 0 6px rgba(248,230,200,0.20));
-      }
-
-    82% {
-  opacity: calc(var(--opacity) * 0.78);
-  transform: scale(0.96);
-  filter:
-    brightness(1.48)
-    drop-shadow(0 0 3px rgba(255,255,255,0.50))
-    drop-shadow(0 0 5px rgba(248,230,200,0.18));
-}
-
-      90% {
-        opacity: calc(var(--opacity) * 0.46);
-        transform: scale(0.66);
-        filter:
-          brightness(1.00)
-          drop-shadow(0 0 2px rgba(255,255,255,0.22))
-          drop-shadow(0 0 4px rgba(248,230,200,0.12));
-      }
-
-      100% {
-        opacity: calc(var(--opacity) * 0.22);
-        transform: scale(0.50);
-        filter:
-          brightness(0.95)
-          drop-shadow(0 0 1px rgba(255,255,255,0.18))
-          drop-shadow(0 0 2px rgba(248,230,200,0.10));
-      }
+      0%   { opacity: calc(var(--opacity) * 0.1);  transform: scale(0.42); filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(0.85); }
+      10%  { opacity: calc(var(--opacity) * 1.05); transform: scale(1.18); filter: drop-shadow(0 0 8px rgba(255, 250, 235, 0.85)) brightness(1.7); }
+      20%  { opacity: calc(var(--opacity) * 0.22); transform: scale(0.58); filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(0.9); }
+      33%  { opacity: calc(var(--opacity) * 0.95); transform: scale(1.1);  filter: drop-shadow(0 0 7px rgba(255, 250, 235, 0.78)) brightness(1.55); }
+      47%  { opacity: calc(var(--opacity) * 0.14); transform: scale(0.48); filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(0.85); }
+      60%  { opacity: calc(var(--opacity) * 1.0);  transform: scale(1.14); filter: drop-shadow(0 0 8px rgba(255, 250, 235, 0.82)) brightness(1.65); }
+      75%  { opacity: calc(var(--opacity) * 0.28); transform: scale(0.62); filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(0.9); }
+      88%  { opacity: calc(var(--opacity) * 0.9);  transform: scale(1.06); filter: drop-shadow(0 0 6px rgba(255, 250, 235, 0.7))  brightness(1.4); }
+      100% { opacity: calc(var(--opacity) * 0.1);  transform: scale(0.42); filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.55)) brightness(0.85); }
     }
   `;
   document.head.appendChild(style);
@@ -2239,7 +2164,7 @@ async function initStoryPost() {
   function createSparkles() {
     layer.innerHTML = "";
 
-    const count = 60;
+    const count = 44;
 
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");
@@ -2252,20 +2177,20 @@ async function initStoryPost() {
       let size, opacity, fall, twinkle, sway;
 
       if (depth > 0.75) {
-  size = rand(5, 7.2);
-  opacity = rand(0.46, 0.64);
+  size = rand(5.5, 7.5);
+  opacity = rand(0.6, 0.78);
   fall = rand(11, 16);
   twinkle = rand(2.2, 3.3);
   sway = rand(-20, 20);
 } else if (depth > 0.38) {
-  size = rand(3.8, 5.4);
-  opacity = rand(0.30, 0.46);
+  size = rand(4, 5.6);
+  opacity = rand(0.42, 0.58);
   fall = rand(15, 21);
   twinkle = rand(2.8, 4.2);
   sway = rand(-17, 17);
 } else {
-  size = rand(2.4, 3.6);
-  opacity = rand(0.18, 0.28);
+  size = rand(2.6, 3.8);
+  opacity = rand(0.26, 0.4);
   fall = rand(18, 25);
   twinkle = rand(3.6, 5.2);
   sway = rand(-14, 14);
@@ -2297,6 +2222,7 @@ async function initStoryPost() {
     resizeTimer = setTimeout(createSparkles, 250);
   });
 })();
+
 
   /* ── Init ── */
   async function init() {
