@@ -1820,6 +1820,7 @@ async function initStoryPost() {
           let cls = 'location-transport__line';
           if (/^\[/.test(ln)) cls += ' is-label';
           else if (/^＊/.test(ln)) cls += ' is-note';
+          else if (/^[　\s]/.test(ln)) cls += ' is-note'; // 각주가 줄바꿈되어 이어지는 줄(들여쓰기)도 같은 스타일
           else if (/^제\s?\d/.test(ln)) cls += ' is-sub';
           // 괄호로 된 부가설명(예: "(3분 소요)")만 살짝 작게 감쌉니다.
           const withSmallParens = ln.replace(/(\([^)]*\))/g, '<span class="location-transport__detail">$1</span>');

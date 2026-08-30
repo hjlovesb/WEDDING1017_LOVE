@@ -8257,6 +8257,10 @@ html, body {
   border-bottom: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
 }
 
 /* ======================================================
@@ -14369,10 +14373,17 @@ body, p, span, div, a, button, h1, h2, h3 {
 .location-transport__line.is-note {
   font-size: 0.78rem !important;
   white-space: normal !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
 }
 .location-transport__detail {
   font-size: 0.68rem !important;
   white-space: nowrap !important;
+  color: #3f3a33 !important;
+}
+.location-transport__line.is-note .location-transport__detail {
+  font-size: inherit !important;
+  font-weight: 500 !important;
 }
 
 /* 계좌 복사 버튼 — 내용이 길어도 버튼이 눌리거나 줄 위치가 흔들리지
